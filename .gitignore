@@ -1,0 +1,7 @@
+# Nur lokal — nicht ins (öffentliche) Repo / nicht deployen.
+
+# Quell-Bilder (sind in index.html als base64 eingebettet) + Arbeitsdokumente
+_local/
+
+# Claude-Code-Projekteinstellungen (lokales Tooling)
+.claude/
