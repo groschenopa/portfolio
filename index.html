@@ -155,6 +155,32 @@
   .skills b{font-family:var(--font-display); font-weight:500}
   @media (max-width:820px){.about-grid{grid-template-columns:1fr}}
 
+  /* About: Skill-Tags + Bubbles */
+  .tags{list-style:none; padding:0; margin:24px 0 0; display:flex; flex-wrap:wrap; gap:9px}
+  .tags li{font-family:var(--font-display); font-size:.82rem; color:var(--ink-2); border:1px solid var(--line); border-radius:999px; padding:6px 13px; line-height:1}
+  .about-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:40px 0 0}
+  .bubble{background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:22px 22px 24px; transition:transform .2s ease, border-color .2s ease}
+  .bubble:hover{transform:translateY(-4px); border-color:var(--accent)}
+  .bubble h3{font-family:var(--font-display); font-weight:600; font-size:1.05rem; line-height:1.2; margin:0 0 10px; padding-top:14px; position:relative}
+  .bubble h3::before{content:""; position:absolute; top:0; left:0; width:28px; height:4px; border-radius:2px; background:var(--accent)}
+  .bubble p{font-size:.92rem; line-height:1.55; color:var(--ink-2); margin:0; max-width:none}
+  @media (max-width:820px){.about-cards{grid-template-columns:1fr}}
+
+  /* ── Werdegang / Timeline ── */
+  .cv-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem, 5vw, 5rem); align-items:start}
+  .cv-grid .lead2{font-size:var(--fs-lead); line-height:1.5; color:var(--ink-2); margin:0; max-width:46ch}
+  .timeline{list-style:none; margin:0; padding:0; position:relative}
+  .timeline::before{content:""; position:absolute; left:7px; top:8px; bottom:8px; width:2px; background:var(--line)}
+  .tl-item{position:relative; padding:0 0 26px 36px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-item::before{content:""; position:absolute; left:0; top:4px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:3px solid var(--accent); box-sizing:border-box}
+  .tl-item.tl-edu::before{border-color:var(--ink-2)}
+  .tl-year{font-family:var(--font-display); font-weight:600; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin:0}
+  .tl-edu .tl-year{color:var(--ink-2)}
+  .tl-head{font-family:var(--font-display); font-weight:600; font-size:1.05rem; margin:3px 0 2px; color:var(--ink)}
+  .tl-role{font-size:.95rem; line-height:1.4; color:var(--ink-2); margin:0; max-width:none}
+  @media (max-width:820px){.cv-grid{grid-template-columns:1fr} .cv-grid .lead2{margin:0 0 8px}}
+
   /* ── Work / Cases ── */
   .carousel{margin-top:8px}
   .track{display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; padding-bottom:6px; scrollbar-width:none; -ms-overflow-style:none}
@@ -228,6 +254,7 @@
       <div class="nav-right">
         <nav class="menu" id="menu">
           <a href="#about" data-i18n="nav.about">Über mich</a>
+          <a href="#career" data-i18n="nav.career">Werdegang</a>
           <a href="#work" data-i18n="nav.work">Projekte</a>
           <span class="lang" role="group" aria-label="Sprache / Language">
             <button data-lang="de">DE</button>
@@ -254,7 +281,7 @@
           <h1 class="display reveal" data-i18n="hero.title">Klartexten.<br><span class="accent">Vordenken.</span></h1>
           <p class="lead reveal" data-i18n="hero.lead">Hi! Ich bin Daniel, Content Strategist und AI-Enabler mit tiefen Wurzeln in der B2B-Redaktion. Damit durchdringe ich komplexe Themen und bereite sie so auf, dass die richtige Zielgruppe sie versteht und nutzen kann: Deine!</p>
           <div class="cta reveal">
-            <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">Schwerpunkte</a>
+            <a class="btn btn-primary" href="#about" data-i18n="hero.cta1">So arbeite ich</a>
             <a class="btn btn-ghost" href="#contact" data-i18n="hero.cta2">Kontakt</a>
           </div>
         </div>
@@ -282,14 +309,67 @@
         </div>
         <div class="reveal">
           <p class="lead2" data-i18n="about.lead">Ich komme aus der Redaktion und bin dabei geblieben, weil mich das Übersetzen reizt: ein komplexes Thema aus den relevanten Perspektiven betrachten und dann verständlich auf den Punkt bringen. Dieses Urteilsvermögen ist genau die Kernkompetenz, die es für das KI-Zeitalter braucht.</p>
-          <p data-i18n="about.p1">Daraus sind drei Schwerpunkte gewachsen: Content-Strategie mit redaktionellem Kern, KI-Enablement für den produktiven Einsatz von GenAI und Change Management auf Augenhöhe. Zunehmend gehört dazu auch, Inhalte für die Auffindbarkeit in KI-Systemen zu denken (GEO). Wie das in der Praxis aussieht, zeigen meine Projekte unten.</p>
-          <ul class="skills">
-            <li><b data-i18n="about.s1">Content-Strategie</b></li>
-            <li><b data-i18n="about.s2">Redaktion, PR &amp; CEO-Ghostwriting</b></li>
-            <li><b data-i18n="about.s3">Copywriting, SEO, SEA &amp; GEO</b></li>
-            <li><b data-i18n="about.s4">KI-Enablement &amp; Operationalisierung</b></li>
-            <li><b data-i18n="about.s5">Change Management &amp; Agile · PSM I, PSPO I</b></li>
+          <ul class="tags">
+            <li data-i18n="about.s1">Content-Strategie</li>
+            <li data-i18n="about.s2">Redaktion, PR &amp; CEO-Ghostwriting</li>
+            <li data-i18n="about.s3">Copywriting, SEO, SEA &amp; GEO</li>
+            <li data-i18n="about.s4">KI-Enablement &amp; Operationalisierung</li>
+            <li data-i18n="about.s5">Change Management &amp; Agile · PSM I, PSPO I</li>
           </ul>
+        </div>
+      </div>
+      <div class="about-cards">
+        <div class="bubble reveal">
+          <h3 data-i18n="about.b1t">Texte mit Tiefe</h3>
+          <p data-i18n="about.b1d">Ich schreibe nicht für dich, sondern für dein Publikum: Themen durchdringen, die wichtigen Perspektiven abwägen und klar auf den Punkt bringen. Tiefe &gt; Buzzwords, immer.</p>
+        </div>
+        <div class="bubble reveal">
+          <h3 data-i18n="about.b2t">Sichtbar für Mensch und Maschine</h3>
+          <p data-i18n="about.b2d">Inhalte, die ankommen: bei deiner Zielgruppe genauso wie bei den KI-Systemen, die sie finden und korrekt zitieren sollen. SEO, GEO? Kenn ich, kann ich.</p>
+        </div>
+        <div class="bubble reveal">
+          <h3 data-i18n="about.b3t">Wenn ich afk bin</h3>
+          <p data-i18n="about.b3d">Zum Abschalten gehe ich auf den Badminton-Court, ins Kino oder die nächste Multiplayer-Lobby. Bekennender Geek, schon lange vor ChatGPT.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WERDEGANG ── -->
+    <section id="career" class="wrap">
+      <div class="cv-grid">
+        <div class="reveal">
+          <p class="num" data-i18n="career.num">02 / Werdegang</p>
+          <h2 data-i18n="career.title">Wo ich herkomme.</h2>
+          <p class="lead2" data-i18n="career.lead">Content, Redaktion und Kommunikation — in Vollzeit seit 2018, mit redaktionellen Wurzeln schon im Studium. Vier Stationen, ein roter Faden: komplexe Themen verständlich machen.</p>
+        </div>
+        <div class="reveal">
+          <ol class="timeline">
+            <li class="tl-item">
+              <p class="tl-year" data-i18n="cv1.year">seit 2026</p>
+              <p class="tl-head" data-i18n="cv1.org">Convidera, Köln</p>
+              <p class="tl-role" data-i18n="cv1.role">AI Content Marketing Lead</p>
+            </li>
+            <li class="tl-item">
+              <p class="tl-year" data-i18n="cv2.year">2025–26</p>
+              <p class="tl-head" data-i18n="cv2.org">Comma Soft, Bonn</p>
+              <p class="tl-role" data-i18n="cv2.role">Senior Redakteur, Content &amp; Kampagnen</p>
+            </li>
+            <li class="tl-item">
+              <p class="tl-year" data-i18n="cv3.year">2019–25</p>
+              <p class="tl-head" data-i18n="cv3.org">palmerhargreaves, Köln</p>
+              <p class="tl-role" data-i18n="cv3.role">Editor → Senior Editor · B2B-Agentur</p>
+            </li>
+            <li class="tl-item">
+              <p class="tl-year" data-i18n="cv4.year">2015–19</p>
+              <p class="tl-head" data-i18n="cv4.org">next level, Köln</p>
+              <p class="tl-role" data-i18n="cv4.role">Online-Redaktion &amp; Marketing</p>
+            </li>
+            <li class="tl-item tl-edu">
+              <p class="tl-year" data-i18n="cv5.year">2011–18</p>
+              <p class="tl-head" data-i18n="cv5.org">Uni Köln &amp; Bonn</p>
+              <p class="tl-role" data-i18n="cv5.role">B.A. Medienkulturwissenschaft, M.A. Medienwissenschaft</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
@@ -413,18 +493,30 @@
     de:{
       "meta.title":"Daniel Martin – Content Strategist & AI Enablement",
       "meta.desc":"Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie für komplexe Themen, KI und Change.",
-      "nav.about":"Über mich", "nav.work":"Projekte", "nav.contact":"Kontakt", "nav.cta":"Kontakt",
+      "nav.about":"Über mich", "nav.career":"Werdegang", "nav.work":"Projekte", "nav.contact":"Kontakt", "nav.cta":"Kontakt",
       "hero.eyebrow":"Content Strategy, Copy &amp; AI · Köln",
       "hero.title":"Klartexten.<br><span class='accent'>Vordenken.</span>",
       "hero.lead":"Hi! Ich bin Daniel, Content Strategist und AI-Enabler mit tiefen Wurzeln in der B2B-Redaktion. Damit durchdringe ich komplexe Themen und bereite sie so auf, dass die richtige Zielgruppe sie versteht und nutzen kann: Deine!",
-      "hero.cta1":"Schwerpunkte", "hero.cta2":"Kontakt",
+      "hero.cta1":"So arbeite ich", "hero.cta2":"Kontakt",
       "about.num":"01 / Über mich", "about.title":"Verständlichkeit ist kein Zufall.",
       "about.lead":"Ich komme aus der Redaktion und bin dabei geblieben, weil mich das Übersetzen reizt: ein komplexes Thema aus den relevanten Perspektiven betrachten und dann verständlich auf den Punkt bringen. Dieses Urteilsvermögen ist genau die Kernkompetenz, die es für das KI-Zeitalter braucht.",
-      "about.p1":"Daraus sind drei Schwerpunkte gewachsen: Content-Strategie mit redaktionellem Kern, KI-Enablement für den produktiven Einsatz von GenAI und Change Management auf Augenhöhe. Zunehmend gehört dazu auch, Inhalte für die Auffindbarkeit in KI-Systemen zu denken (GEO). Wie das in der Praxis aussieht, zeigen meine Projekte unten.",
+      "about.b1t":"Texte mit Tiefe",
+      "about.b1d":"Ich schreibe nicht für dich, sondern für dein Publikum: Themen durchdringen, die wichtigen Perspektiven abwägen und klar auf den Punkt bringen. Tiefe &gt; Buzzwords, immer.",
+      "about.b2t":"Sichtbar für Mensch und Maschine",
+      "about.b2d":"Inhalte, die ankommen: bei deiner Zielgruppe genauso wie bei den KI-Systemen, die sie finden und korrekt zitieren sollen. SEO, GEO? Kenn ich, kann ich.",
+      "about.b3t":"Wenn ich afk bin",
+      "about.b3d":"Zum Abschalten gehe ich auf den Badminton-Court, ins Kino oder die nächste Multiplayer-Lobby. Bekennender Geek, schon lange vor ChatGPT.",
       "about.s1":"Content-Strategie", "about.s2":"Redaktion, PR &amp; CEO-Ghostwriting",
       "about.s3":"Copywriting, SEO, SEA &amp; GEO", "about.s4":"KI-Enablement &amp; Operationalisierung",
       "about.s5":"Change Management &amp; Agile · PSM I, PSPO I",
-      "work.num":"02 / Projekte", "work.title":"Ausgewählte Projekte.",
+      "career.num":"02 / Werdegang", "career.title":"Wo ich herkomme.",
+      "career.lead":"Content, Redaktion und Kommunikation — in Vollzeit seit 2018, mit redaktionellen Wurzeln schon im Studium. Vier Stationen, ein roter Faden: komplexe Themen verständlich machen.",
+      "cv1.year":"seit 2026", "cv1.org":"Convidera, Köln", "cv1.role":"AI Content Marketing Lead",
+      "cv2.year":"2025–26", "cv2.org":"Comma Soft, Bonn", "cv2.role":"Senior Redakteur, Content &amp; Kampagnen",
+      "cv3.year":"2019–25", "cv3.org":"palmerhargreaves, Köln", "cv3.role":"Editor → Senior Editor · B2B-Agentur",
+      "cv4.year":"2015–19", "cv4.org":"next level, Köln", "cv4.role":"Online-Redaktion &amp; Marketing",
+      "cv5.year":"2011–18", "cv5.org":"Uni Köln &amp; Bonn", "cv5.role":"B.A. Medienkulturwissenschaft, M.A. Medienwissenschaft",
+      "work.num":"03 / Projekte", "work.title":"Ausgewählte Projekte.",
       "work.intro":"Fünf Beispiele, wie Content, KI und Change in der Praxis zusammenspielen.",
       "case1.title":"Relaunch alan.de", "case1.meta":"GenAI-Plattform · SEA · Leadstrecken · PR",
       "case1.desc":"Alan ist die souveräne, in Deutschland gehostete KI-Plattform, ganz auf die Bedürfnisse von Unternehmen und KRITIS ausgelegt. Für den Relaunch habe ich die Inhalte über alle Kanäle verantwortet: von SEA-Copy und Leadstrecken über Blog und Social bis zur PR.",
@@ -442,7 +534,7 @@
       "case5.desc":"Für den internationalen Messeauftritt eines großen Telko-Konzerns habe ich das übergreifende Narrativ entwickelt. Dazu kamen Briefings für die Moderation des Bühnenprogramms und die konsistente thematische Koordination der Speaker-Slots.",
       "case5.result":"Ein roter Faden für die ganze Bühne",
       "case.view":"Projekt ansehen ↗", "case.talk":"Mehr im Gespräch →",
-      "contact.num":"03 / Kontakt", "contact.title":"Lass uns reden.",
+      "contact.num":"04 / Kontakt", "contact.title":"Lass uns reden.",
       "contact.lead":"Content-Strategie, KI im Arbeitsalltag oder die Begleitung von Veränderung: Bei dir steht eines dieser Themen an? Dann freue ich mich über deine Nachricht.",
       "contact.mailto":"mailto:hallo@danielmartin.fyi?subject=Anfrage%20%C3%BCber%20danielmartin.fyi&body=Hallo%20Daniel%2C%0D%0A%0D%0A%0D%0AViele%20Gr%C3%BC%C3%9Fe",
       "foot.rights":"© 2026 Daniel Martin",
@@ -458,18 +550,30 @@
     en:{
       "meta.title":"Daniel Martin – Content Strategist & AI Enablement",
       "meta.desc":"Daniel Martin, content and AI strategist based in Cologne. I make complex topics clear and effective: content strategy, AI and change.",
-      "nav.about":"About", "nav.work":"Work", "nav.contact":"Contact", "nav.cta":"Contact",
+      "nav.about":"About", "nav.career":"Career", "nav.work":"Work", "nav.contact":"Contact", "nav.cta":"Contact",
       "hero.eyebrow":"Content Strategy, Copy &amp; AI · Cologne",
       "hero.title":"Make it clear.<br><span class='accent'>Make it count.</span>",
       "hero.lead":"Hi! I'm Daniel, a content strategist and AI enabler with deep roots in B2B editorial. That's how I get to the heart of complex topics and shape them so the right audience understands and can use them: yours.",
-      "hero.cta1":"What I do", "hero.cta2":"Get in touch",
+      "hero.cta1":"How I work", "hero.cta2":"Get in touch",
       "about.num":"01 / About", "about.title":"Clarity is no accident.",
       "about.lead":"I started out in editorial and stayed, because the translation work is what I enjoy: looking at a complex topic from the angles that matter, then getting it across clearly. That judgment is exactly the core skill the AI age calls for.",
-      "about.p1":"Three areas have grown out of that: content strategy with editorial roots, AI enablement for putting GenAI to productive use, and change management as a partner at eye level. Increasingly, that also means shaping content to be found and cited by AI systems (GEO). My projects below show what that looks like in practice.",
+      "about.b1t":"Editor at the core",
+      "about.b1d":"I think from the reader's side: get to the heart of a topic, weigh the angles that matter and make the point clearly. Depth beats buzzword, every time.",
+      "about.b2t":"Found by people and machines",
+      "about.b2d":"Content that lands: with your audience and with the AI systems meant to find and cite it correctly. SEO, GEO? Been there, done that.",
+      "about.b3t":"If I'm afk",
+      "about.b3d":"When I want to switch off, you'll find me in the cinema, on the badminton court, or in a multiplayer lobby. I was a geek long before ChatGPT.",
       "about.s1":"Content strategy", "about.s2":"Editorial, PR &amp; CEO ghostwriting",
       "about.s3":"Copywriting, SEO, SEA &amp; GEO", "about.s4":"AI enablement &amp; operationalization",
       "about.s5":"Change management &amp; agile · PSM I, PSPO I",
-      "work.num":"02 / Work", "work.title":"Selected work.",
+      "career.num":"02 / Career", "career.title":"Where I'm coming from.",
+      "career.lead":"Content, editorial and communications — full-time since 2018, with editorial roots going back to my studies. Four stops, one thread: making complex topics clear.",
+      "cv1.year":"since 2026", "cv1.org":"Convidera, Cologne", "cv1.role":"AI Content Marketing Lead",
+      "cv2.year":"2025–26", "cv2.org":"Comma Soft, Bonn", "cv2.role":"Senior Editor, Content &amp; Campaigns",
+      "cv3.year":"2019–25", "cv3.org":"palmerhargreaves, Cologne", "cv3.role":"Editor → Senior Editor · B2B agency",
+      "cv4.year":"2015–19", "cv4.org":"next level, Cologne", "cv4.role":"Online editorial &amp; marketing",
+      "cv5.year":"2011–18", "cv5.org":"Cologne &amp; Bonn University", "cv5.role":"B.A. Media &amp; Culture Studies, M.A. Media Studies",
+      "work.num":"03 / Work", "work.title":"Selected work.",
       "work.intro":"Five examples of how content, AI and change come together in practice.",
       "case1.title":"alan.de relaunch", "case1.meta":"GenAI platform · SEA · lead funnels · PR",
       "case1.desc":"Alan is the sovereign, German-hosted AI platform, built for the needs of enterprises and critical-infrastructure (KRITIS) operators. For the relaunch I owned the content across every channel: from SEA copy and lead funnels to blog, social and PR.",
@@ -487,7 +591,7 @@
       "case5.desc":"For the international trade-fair presence of a major telco group, I developed the overarching narrative, plus briefings for hosting the stage programme and the consistent thematic coordination of the speaker slots.",
       "case5.result":"One thread across the whole stage",
       "case.view":"View project ↗", "case.talk":"Let's talk →",
-      "contact.num":"03 / Contact", "contact.title":"Let's talk.",
+      "contact.num":"04 / Contact", "contact.title":"Let's talk.",
       "contact.lead":"Content strategy, AI in day-to-day work, or support with change: is one of those on your agenda right now? Then I'd be glad to hear from you.",
       "contact.mailto":"mailto:hallo@danielmartin.fyi?subject=Inquiry%20via%20danielmartin.fyi&body=Hi%20Daniel%2C%0D%0A%0D%0A%0D%0ABest%20regards",
       "foot.rights":"© 2026 Daniel Martin",

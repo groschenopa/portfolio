@@ -5,3 +5,6 @@ _local/
 
 # Claude-Code-Projekteinstellungen (lokales Tooling)
 .claude/
+
+# Editor-/Workspace-Dateien
+portfolio.code-workspace
