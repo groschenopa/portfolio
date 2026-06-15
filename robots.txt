@@ -1,0 +1,8 @@
+
+User-agent: *
+Allow: /
+
+# This robots file allows all web crawlers and bots to crawl and index the
+# contents of the Daniel Martin portfolio site. There are no restricted
+# sections, so crawlers should feel free to explore the entire site. A
+# sitemap is not currently provided.
