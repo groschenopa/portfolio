@@ -6,11 +6,12 @@
 <title>Daniel Martin – Content Strategist &amp; AI Enabler</title>
 <meta name="description" content="Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie für komplexe Themen, KI und Change.">
 <meta name="author" content="Daniel Martin">
+<link rel="canonical" href="https://danielmartin.fyi/">
 <meta name="theme-color" content="#FBFAF7">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Daniel Martin – Content Strategist & AI Enablement">
 <meta property="og:description" content="Komplexe Themen verständlich und wirksam machen: Content-Strategie, KI-Enablement und Change. Aus Köln.">
-<meta property="og:url" content="https://danielmartin.fyi">
+<meta property="og:url" content="https://danielmartin.fyi/">
 <meta property="og:image" content="https://danielmartin.fyi/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -68,6 +69,11 @@
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit}
+
+  /* ── Textauswahl / Markieren – Petrol-Akzent (folgt Hell/Dunkel automatisch) ── */
+  ::selection{background:var(--accent); color:var(--accent-ink); text-shadow:none}
+  ::-moz-selection{background:var(--accent); color:var(--accent-ink); text-shadow:none}
+
   .wrap{max-width:var(--maxw); margin:0 auto; padding-inline:24px}
 
   /* Scroll-Reveal (nur wenn JS aktiv; sonst sichtbar) */
@@ -275,6 +281,58 @@
   .legal{margin-top:16px; line-height:1.7; max-width:62ch}
   .legal strong{color:var(--paper)}
   .legal a{color:var(--paper)}
+
+  /* ── Follower-Cursor (Petrol-Ring) – nur bei feinem Zeiger, JS-gesteuert ──
+     Native Cursor wird erst ausgeblendet, wenn JS die Klasse setzt (Fallback bleibt sonst intakt). */
+  @media (hover:hover) and (pointer:fine){
+    html.has-cursor, html.has-cursor *{cursor:none}
+  }
+  .cursor-ring, .cursor-dot{
+    position:fixed; top:0; left:0; z-index:9999; pointer-events:none;
+    border-radius:50%; opacity:0; will-change:transform;
+    transition:opacity .25s ease;
+  }
+  .cursor-ring{
+    width:34px; height:34px; border:1.5px solid var(--accent);
+    transition:width .22s ease, height .22s ease, background-color .22s ease, border-color .22s ease, opacity .25s ease;
+  }
+  .cursor-dot{width:6px; height:6px; background:var(--accent)}
+  html.cursor-active .cursor-ring, html.cursor-active .cursor-dot{opacity:1}
+  .cursor-ring.is-hover{width:54px; height:54px; background:color-mix(in srgb, var(--accent) 16%, transparent); border-color:transparent}
+  /* Über kontraststarken Flächen (petrol-/ink-gefüllte Buttons + Marquee): Ring/Punkt auf Gegenfarbe, sonst verschwinden sie */
+  .cursor-ring.is-on-accent{border-color:var(--accent-ink)}
+  .cursor-dot.is-on-accent{background:var(--accent-ink)}
+  .cursor-ring.is-hover.is-on-accent{background:color-mix(in srgb, var(--accent-ink) 35%, transparent); border:2px solid var(--accent-ink)}
+  .cursor-ring.is-down{width:26px; height:26px}
+  .cursor-dot.is-hover{opacity:0}
+
+  /* Konami-Hinweis am Cursor (erscheint beim Hover über „Geek") */
+  .cursor-hint{
+    position:fixed; top:0; left:0; z-index:9999; pointer-events:none; opacity:0;
+    background:var(--accent); color:var(--accent-ink);
+    font-family:var(--font-display); font-weight:600; font-size:.8rem; letter-spacing:.06em;
+    padding:5px 11px; border-radius:999px; white-space:nowrap;
+    box-shadow:0 8px 22px color-mix(in srgb, var(--accent) 38%, transparent);
+    transition:opacity .2s ease;
+  }
+  html.cursor-active .cursor-hint.show{opacity:1}
+
+  /* „Geek" als entdeckbares Wort markieren */
+  .geek{text-decoration:underline dotted; text-decoration-color:color-mix(in srgb, var(--accent) 55%, transparent); text-underline-offset:3px; transition:color .15s ease}
+  .geek:hover{color:var(--accent)}
+
+  /* Easteregg: Konami-Konfetti + Toast */
+  .egg-confetti{position:fixed; inset:0; z-index:99998; pointer-events:none; overflow:hidden}
+  .egg-confetti i{position:absolute; top:-8vh; display:block; border-radius:2px; opacity:.9; animation:egg-fall linear forwards}
+  @keyframes egg-fall{to{transform:translateY(118vh) translateX(var(--drift,0)) rotate(var(--rot,360deg)); opacity:.6}}
+  .egg-toast{
+    position:fixed; left:50%; bottom:36px; transform:translate(-50%,16px); z-index:99999; pointer-events:none;
+    max-width:min(88vw, 380px); text-align:center; line-height:1.45;
+    background:var(--accent); color:var(--accent-ink); font-family:var(--font-display); font-weight:600; font-size:.95rem;
+    padding:13px 22px; border-radius:16px; box-shadow:0 14px 30px color-mix(in srgb, var(--accent) 35%, transparent);
+    opacity:0; transition:opacity .35s ease, transform .35s ease;
+  }
+  .egg-toast.in{opacity:1; transform:translate(-50%,0)}
 </style>
 </head>
 <body>
@@ -355,7 +413,7 @@
         </div>
         <div class="bubble reveal">
           <h3 data-i18n="about.b3t">Wenn ich afk bin</h3>
-          <p data-i18n="about.b3d">Zum Abschalten gehe ich auf den Badminton-Court, ins Kino oder die nächste Multiplayer-Lobby. Bekennender Geek, schon lange vor ChatGPT.</p>
+          <p data-i18n="about.b3d">Zum Abschalten gehe ich auf den Badminton-Court, ins Kino oder die nächste Multiplayer-Lobby. Bekennender <span class="geek">Geek</span>, schon lange vor ChatGPT.</p>
         </div>
       </div>
     </section>
@@ -538,7 +596,7 @@
       "about.b2t":"Sichtbar für Mensch und Maschine",
       "about.b2d":"Inhalte, die ankommen: bei deiner Zielgruppe genauso wie bei den KI-Systemen, die sie finden und korrekt zitieren sollen. SEO, GEO? Kenn ich, kann ich.",
       "about.b3t":"Wenn ich afk bin",
-      "about.b3d":"Zum Abschalten gehe ich auf den Badminton-Court, ins Kino oder die nächste Multiplayer-Lobby. Bekennender Geek, schon lange vor ChatGPT.",
+      "about.b3d":"Zum Abschalten gehe ich auf den Badminton-Court, ins Kino oder die nächste Multiplayer-Lobby. Bekennender <span class='geek'>Geek</span>, schon lange vor ChatGPT.",
       "about.s1":"Content-Strategie", "about.s2":"Redaktion, PR &amp; CEO-Ghostwriting",
       "about.s3":"Copywriting, SEO, SEA &amp; GEO", "about.s4":"KI-Enablement &amp; Operationalisierung",
       "about.s5":"Change Management &amp; Agile · PSM I, PSPO I",
@@ -597,7 +655,7 @@
       "about.b2t":"Found by people and machines",
       "about.b2d":"Content that lands: with your audience and with the AI systems meant to find and cite it correctly. SEO, GEO? Been there, done that.",
       "about.b3t":"If I'm afk",
-      "about.b3d":"When I want to switch off, you'll find me in the cinema, on the badminton court, or in a multiplayer lobby. I was a geek long before ChatGPT.",
+      "about.b3d":"When I want to switch off, you'll find me in the cinema, on the badminton court, or in a multiplayer lobby. I was a <span class='geek'>geek</span> long before ChatGPT.",
       "about.s1":"Content strategy", "about.s2":"Editorial, PR &amp; CEO ghostwriting",
       "about.s3":"Copywriting, SEO, SEA &amp; GEO", "about.s4":"AI enablement &amp; operationalization",
       "about.s5":"Change management &amp; agile · PSM I, PSPO I",
@@ -780,6 +838,112 @@
   } else {
     document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
   }
+
+  /* ── Rechtsklick-Kontextmenü deaktivieren ── */
+  document.addEventListener('contextmenu', e=>e.preventDefault());
+
+  /* ── Follower-Cursor (Petrol-Ring) ──
+     Nur bei feinem Zeiger und ohne Reduced-Motion. Rein dekorativ (pointer-events:none),
+     stört Auswahl/Klicks nicht; auf Touch bleibt der native Cursor unverändert. */
+  (function(){
+    const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+    const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if(!fine || reduce) return;
+
+    const root = document.documentElement;
+    const ring = document.createElement('div'); ring.className = 'cursor-ring'; ring.setAttribute('aria-hidden','true');
+    const dot  = document.createElement('div'); dot.className  = 'cursor-dot';  dot.setAttribute('aria-hidden','true');
+    const hint = document.createElement('div'); hint.className = 'cursor-hint'; hint.textContent = '↑↑↓↓…'; hint.setAttribute('aria-hidden','true');
+    document.body.append(ring, dot, hint);
+    root.classList.add('has-cursor');
+
+    const interactive = 'a, button, [role="button"], input, textarea, select, label, summary, .lang button, .theme-toggle, .burger';
+    /* Flächen, über denen der Ring zur Gegenfarbe (--accent-ink) wechselt: petrol- ODER ink-gefüllte Buttons + Marquee */
+    const contrastSurface = '.nav-cta, .btn-primary, .btn-ghost, .caction, .c-prev, .c-next, .theme-toggle, .marquee';
+    let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my, raf = null;
+
+    const place = (el,x,y)=>{ el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`; };
+    place(ring, rx, ry); place(dot, mx, my);
+
+    function loop(){
+      rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+      place(ring, rx, ry);
+      raf = requestAnimationFrame(loop);
+    }
+    function start(){ if(!raf) raf = requestAnimationFrame(loop); }
+    function stop(){ if(raf){ cancelAnimationFrame(raf); raf = null; } }
+
+    document.addEventListener('mousemove', e=>{
+      mx = e.clientX; my = e.clientY;
+      place(dot, mx, my);
+      hint.style.transform = `translate3d(${mx + 14}px, ${my + 14}px, 0)`;
+      if(!root.classList.contains('cursor-active')){ root.classList.add('cursor-active'); start(); }
+    }, {passive:true});
+
+    const setSurface = t=>{
+      const onInteractive = t && t.closest ? t.closest(interactive) : null;
+      const onContrast    = t && t.closest ? t.closest(contrastSurface) : null;
+      ring.classList.toggle('is-hover', !!onInteractive);
+      dot.classList.toggle('is-hover', !!onInteractive);
+      ring.classList.toggle('is-on-accent', !!onContrast);
+      dot.classList.toggle('is-on-accent', !!onContrast);
+      hint.classList.toggle('show', !!(t && t.closest && t.closest('.geek')));
+    };
+    document.addEventListener('mouseover', e=>setSurface(e.target));
+    document.addEventListener('mousedown', ()=>ring.classList.add('is-down'));
+    document.addEventListener('mouseup',   ()=>ring.classList.remove('is-down'));
+    document.addEventListener('mouseleave', ()=>{ root.classList.remove('cursor-active'); stop(); });
+    document.addEventListener('mouseenter', ()=>{ root.classList.add('cursor-active'); start(); });
+  })();
+
+  /* ── Easteregg: Konsolen-Gruß ── */
+  console.log(
+    '%cMoin. Du liest den Quelltext?%c\nDann verstehen wir uns vermutlich gut.  →  hallo@danielmartin.fyi',
+    'color:#0C6B74;font:700 15px/1.6 system-ui,sans-serif',
+    'color:#888;font:400 13px/1.6 system-ui,sans-serif'
+  );
+
+  /* ── Easteregg: Konami-Code → „Vordenken-Modus" ── */
+  (function(){
+    const seq = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+    let i = 0, active = false;
+    document.addEventListener('keydown', e=>{
+      const k = (e.key || '').toLowerCase();
+      if(k === seq[i]){ if(++i === seq.length){ i = 0; celebrate(); } }
+      else { i = (k === seq[0]) ? 1 : 0; }
+    });
+    function celebrate(){
+      if(active) return; active = true;
+      toast('Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)');
+      if(!matchMedia('(prefers-reduced-motion:reduce)').matches) confetti();
+      setTimeout(()=>{ active = false; }, 4000);
+    }
+    function toast(msg){
+      const t = document.createElement('div');
+      t.className = 'egg-toast'; t.textContent = msg; t.setAttribute('role','status');
+      document.body.appendChild(t);
+      requestAnimationFrame(()=>t.classList.add('in'));
+      setTimeout(()=>{ t.classList.remove('in'); setTimeout(()=>t.remove(), 450); }, 3600);
+    }
+    function confetti(){
+      const layer = document.createElement('div'); layer.className = 'egg-confetti'; layer.setAttribute('aria-hidden','true');
+      const colors = ['#0C6B74','#34B7C4','#6FBFC6','#A9DBDF'];
+      for(let n=0; n<90; n++){
+        const p = document.createElement('i');
+        const size = 6 + Math.random()*8;
+        p.style.left = Math.random()*100 + 'vw';
+        p.style.width = p.style.height = size + 'px';
+        p.style.background = colors[(Math.random()*colors.length)|0];
+        p.style.animationDuration = (3.3 + Math.random()*3) + 's';
+        p.style.animationDelay = (Math.random()*0.5) + 's';
+        p.style.setProperty('--rot', (Math.random()*720 - 360) + 'deg');
+        p.style.setProperty('--drift', (Math.random()*160 - 80) + 'px');
+        layer.appendChild(p);
+      }
+      document.body.appendChild(layer);
+      setTimeout(()=>layer.remove(), 7200);
+    }
+  })();
 </script>
 </body>
 </html>
