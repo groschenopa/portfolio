@@ -605,29 +605,6 @@ html.cursor-active .cursor-ring, html.cursor-active .cursor-dot{opacity:1}
 }
 html.cursor-active .cursor-hint.show{opacity:1}
 
-/* ── Portal-Wipe: verbirgt den Seitenwechsel Live ↔ Lab.
-      Übergabetrick: beide Seiten zeigen am Navigationszeitpunkt denselben
-      Vollbild-Zustand (tiefes Petrol + D-Monogramm) → Reload unsichtbar. ── */
-.wipe{position:fixed; inset:0; z-index:2147483000; pointer-events:none; overflow:hidden; visibility:hidden}
-.wipe i{position:absolute; left:-10%; right:-10%; top:-12%; bottom:-12%; transform:translateY(114%) rotate(-3deg)}
-.wipe .p1{background:#34B7C4}
-.wipe .p2{background:#0C6B74}
-.wipe svg{position:absolute; left:50%; top:50%; width:min(22vw,180px); height:auto; transform:translate(-50%,-50%); fill:#F4F2EC; opacity:0}
-.wipe.cover{visibility:visible}
-.wipe.cover i{transition:transform .55s var(--ease-inout); transform:translateY(0) rotate(0deg)}
-.wipe.cover .p2{transition-delay:.07s}
-.wipe.cover svg{opacity:1; transition:opacity .25s ease .3s}
-/* Ankunft: sofort zugedeckt, ohne Transition */
-html.dm-covered .wipe{visibility:visible}
-html.dm-covered .wipe i{transform:none}
-html.dm-covered .wipe svg{opacity:1}
-/* Aufdecken */
-.wipe.reveal{visibility:visible}
-.wipe.reveal i{transition:transform .6s var(--ease-inout); transform:translateY(-114%) rotate(3deg)}
-.wipe.reveal .p1{transition-delay:.08s}
-.wipe.reveal svg{opacity:0; transition:opacity .2s ease}
-@media (prefers-reduced-motion:reduce){.wipe i, .wipe svg{transition:none !important}}
-
 /* ── Easteregg: Konami → Scramble-Welle + Mono-Toast ── */
 .egg-toast{
   position:fixed; left:50%; bottom:36px; transform:translate(-50%,16px); z-index:99999; pointer-events:none;

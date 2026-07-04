@@ -28,9 +28,6 @@
   if(noAnim) docEl.classList.add('noanim');
   var qsTheme = (qs && (qs.get('theme') === 'light' || qs.get('theme') === 'dark')) ? qs.get('theme') : null;
 
-  /* Portal: kamen wir per Wipe von der Hauptseite? (Early-Head-Script setzt die Klasse) */
-  var viaWipe = docEl.classList.contains('dm-covered');
-
   /* Module können auf Theme-Wechsel reagieren (z. B. Canvas-Farben) */
   var themeHooks = [];
 
@@ -109,7 +106,7 @@
      Werte dürfen HTML enthalten (innerHTML). Impressum bleibt rechtlich auf Deutsch. */
   var I18N = {
     de:{
-      "meta.title":"Daniel Martin – Content Strategist & AI Enablement · Lab",
+      "meta.title":"Daniel Martin – Content Strategist & AI Enablement",
       "meta.desc":"Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie für komplexe Themen, KI und Change.",
       "nav.about":"Über mich", "nav.career":"Werdegang", "nav.work":"Projekte", "nav.contact":"Kontakt", "nav.cta":"Kontakt",
       "skip.link":"Zum Inhalt springen",
@@ -166,7 +163,7 @@
       "aria.home":"Daniel Martin – Startseite", "aria.menu":"Menü", "aria.theme":"Hell-/Dunkelmodus umschalten"
     },
     en:{
-      "meta.title":"Daniel Martin – Content Strategist & AI Enablement · Lab",
+      "meta.title":"Daniel Martin – Content Strategist & AI Enablement",
       "meta.desc":"Daniel Martin, content and AI strategist based in Cologne. I make complex topics clear and effective: content strategy, AI and change.",
       "nav.about":"About", "nav.career":"Career", "nav.work":"Work", "nav.contact":"Contact", "nav.cta":"Contact",
       "skip.link":"Skip to content",
@@ -442,7 +439,6 @@
   }
   (function initPre(){
     var pre = $('#preloader');
-    if(viaWipe){ if(pre) pre.remove(); return; }  /* Portal-Reveal übernimmt startPage() */
     var skip = reduced || noPre;
     try{ skip = skip || sessionStorage.getItem('dm-pre') === '1'; }catch(e){}
     if(!pre || skip){
@@ -469,36 +465,6 @@
       }
     })();
   })();
-
-  /* ═══════════════ Portal-Wipe: Ankunft aufdecken, Konami = Weg zurück ═══════════════ */
-  var wipeEl = $('#wipe');
-  function wipeReveal(){
-    try{ sessionStorage.removeItem('dm-wipe'); }catch(e){}
-    if(!wipeEl || reduced){
-      docEl.classList.remove('dm-covered');
-      if(wipeEl) wipeEl.style.display = 'none';
-      startPage();
-      return;
-    }
-    setTimeout(function(){
-      docEl.classList.remove('dm-covered');
-      wipeEl.classList.add('reveal');
-      startPage();
-      setTimeout(function(){ wipeEl.classList.remove('reveal'); wipeEl.style.display = 'none'; }, 950);
-    }, 300);
-  }
-  function wipeTo(url){
-    try{ sessionStorage.setItem('dm-wipe', '1'); }catch(e){}
-    if(reduced || !wipeEl){ location.href = url; return; }
-    wipeEl.style.display = '';
-    wipeEl.classList.remove('reveal');
-    wipeEl.classList.add('cover');
-    setTimeout(function(){ location.href = url; }, 680);
-  }
-  if(viaWipe){
-    if(document.readyState === 'complete') wipeReveal();
-    else window.addEventListener('load', wipeReveal);
-  }
 
   /* ═══════════════ Topbar: Scroll-Status + Hide-on-Scroll ═══════════════ */
   var topbar = $('#topbar');
@@ -1119,10 +1085,8 @@
     });
     function celebrate(){
       if(active) return; active = true;
-      /* Konami im Lab = Portal zurück zur Hauptseite; die Scramble-Welle
-         läuft an, während der Wipe darüberzieht */
+      toast('Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)');
       if(!reduced) scrambleWave();
-      wipeTo('/');
       setTimeout(function(){ active = false; }, 4000);
     }
     /* Scramble-Welle: alle sichtbaren Headlines dekodieren sich einmal durch –
