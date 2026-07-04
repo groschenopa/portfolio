@@ -642,3 +642,42 @@ html.cursor-active .cursor-hint.show{opacity:1}
   .pc-desc{font-size:.92rem}
   .sec{padding-block:clamp(5rem,12vh,8rem)}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Easteregg „Terminal-Modus": Der Konami-Code schaltet einen
+   Secret-Skin frei – Cheat-Code = Skin-Unlock, wie im Spiel.
+   Reines Token-Override: die ganze Seite folgt dem Design-System.
+   Steht bewusst am Dateiende und gewinnt damit die Kaskade
+   (auch gegen Light-Theme und den Invert-Block).
+   ═══════════════════════════════════════════════════════════ */
+:root[data-egg="terminal"]{
+  --bg:#050807; --bg-2:#0A110E; --bg-3:#0D1713;
+  --ink:#45F0CE; --ink-2:#27AE92; --line:#123A30;
+  --acc:#8CF7DF; --acc-deep:#0E7A66; --acc-soft:#C9FBEF; --acc-ink:#03110D;
+  --pg1:#12604F; --pg2:#0A3B32; --pg3:#03110D;
+  --canvas-op:.4; --grain-op:.1;
+  --acc-hover:#C9FBEF;
+  --cur-blend:difference; --cur-col:#fff;
+  --cur-hover-bg:#fff; --cur-hover-bd:#fff;
+  --font-display:var(--font-mono);
+}
+:root[data-egg="terminal"] body{font-family:var(--font-mono)}
+/* Mono braucht kaum negative Laufweite */
+:root[data-egg="terminal"] .h-line{letter-spacing:0}
+:root[data-egg="terminal"] .sec-title{letter-spacing:-.01em}
+/* Grain wird zu Phosphor-Scanlines */
+:root[data-egg="terminal"] .grain{
+  opacity:.12; animation:none;
+  background-image:repeating-linear-gradient(to bottom, rgba(69,240,206,.06) 0 1px, transparent 1px 3px);
+  background-size:auto;
+}
+/* Petrol-Grafiken in die Phosphor-Familie drehen */
+:root[data-egg="terminal"] .pc-art{filter:hue-rotate(115deg) saturate(1.1)}
+:root[data-egg="terminal"] .hero-portrait img{filter:grayscale(1) contrast(1.1) brightness(.85)}
+/* Kontakt/Footer-Invert folgt dem Skin statt dem Light-Theme */
+:root[data-egg="terminal"] .invert{
+  --bg:#03110D; --bg-2:#082019; --bg-3:#0A2A21;
+  --ink:#45F0CE; --ink-2:#27AE92; --line:#12463A;
+  --acc:#8CF7DF; --acc-deep:#0E7A66; --acc-ink:#03110D;
+  background:var(--bg); color:var(--ink);
+}

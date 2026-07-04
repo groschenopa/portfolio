@@ -27,6 +27,8 @@
   var noPre  = noAnim || !!(qs && qs.get('pre') === '0');
   if(noAnim) docEl.classList.add('noanim');
   var qsTheme = (qs && (qs.get('theme') === 'light' || qs.get('theme') === 'dark')) ? qs.get('theme') : null;
+  /* ?egg=1: Terminal-Modus direkt ansehen (Debug/Vorschau, ohne Konami) */
+  if(qs && qs.get('egg') === '1') docEl.setAttribute('data-egg', 'terminal');
 
   /* Module können auf Theme-Wechsel reagieren (z. B. Canvas-Farben) */
   var themeHooks = [];
@@ -579,6 +581,12 @@
       {r:.15, sx:1.15,sy:.8,  px:1.2, py:5.1}
     ];
     function palette(){
+      if(docEl.getAttribute('data-egg') === 'terminal'){
+        return {
+          comp:'lighter', bg:'#050807',
+          cols:[['#0E7A66',.8], ['#45F0CE',.38], ['#0B2B24',.9], ['#8CF7DF',.2]]
+        };
+      }
       return effectiveTheme() === 'dark' ? {
         comp:'lighter', bg:'#0A0A0D',
         cols:[['#0C6B74',.85], ['#34B7C4',.6], ['#123B49',.9], ['#A9DBDF',.28]]
@@ -1085,9 +1093,23 @@
     });
     function celebrate(){
       if(active) return; active = true;
-      toast('Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)');
+      /* Terminal-Modus an/aus: die Scramble-Welle läuft an und mittendrin
+         flippt der Skin – die Texte „dekodieren" sich in den neuen Modus */
+      var on = docEl.getAttribute('data-egg') === 'terminal';
       if(!reduced) scrambleWave();
-      setTimeout(function(){ active = false; }, 4000);
+      setTimeout(function(){
+        if(on){
+          docEl.removeAttribute('data-egg');
+          try{ sessionStorage.removeItem('dm-egg'); }catch(e){}
+        } else {
+          docEl.setAttribute('data-egg', 'terminal');
+          try{ sessionStorage.setItem('dm-egg', '1'); }catch(e){}
+        }
+        refresh();                                   /* Mono-Metriken: Fit + Splits neu */
+        themeHooks.forEach(function(fn){ fn(); });   /* Canvas auf Phosphor umfärben */
+      }, reduced ? 0 : 280);
+      if(!on) toast('Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)');
+      setTimeout(function(){ active = false; }, 1500);
     }
     /* Scramble-Welle: alle sichtbaren Headlines dekodieren sich einmal durch –
        kinetische Typo statt Partikel, gibt den Inhalt sofort zurück. */
