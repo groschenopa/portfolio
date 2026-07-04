@@ -671,6 +671,11 @@ html.cursor-active .cursor-hint.show{opacity:1}
   background-image:repeating-linear-gradient(to bottom, rgba(69,240,206,.06) 0 1px, transparent 1px 3px);
   background-size:auto;
 }
+/* Text-Stroke zeigt bei System-Monofonts die inneren Glyphen-Nähte
+   („Formen setzen sich zusammen") – daher gefüllt-gedimmt statt Outline */
+:root[data-egg="terminal"] .h-line-outline{-webkit-text-stroke:0; color:var(--ink-2)}
+:root[data-egg="terminal"] .h-line-outline:hover{color:var(--acc)}
+:root[data-egg="terminal"] .ghost{-webkit-text-stroke:0; color:color-mix(in srgb, var(--ink) 8%, transparent)}
 /* Petrol-Grafiken in die Phosphor-Familie drehen */
 :root[data-egg="terminal"] .pc-art{filter:hue-rotate(115deg) saturate(1.1)}
 :root[data-egg="terminal"] .hero-portrait img{filter:grayscale(1) contrast(1.1) brightness(.85)}
