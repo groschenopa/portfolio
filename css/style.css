@@ -139,6 +139,7 @@ html.noanim .kin .ch{transform:none !important}
 .topbar.scrolled{background:color-mix(in srgb, var(--bg) 78%, transparent); backdrop-filter:blur(16px); border-bottom-color:var(--line)}
 .topbar.hidden{transform:translateY(-110%)}
 .brand{display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:1.08rem; letter-spacing:-.02em; text-decoration:none; z-index:95}
+.brand-name{white-space:nowrap}
 .brand-logo{width:1.6em; height:1.6em; border-radius:6px}
 .brand .dot{color:var(--acc)}
 .top-status{font-size:.7rem; text-transform:uppercase; color:var(--ink-2); letter-spacing:.16em}
@@ -635,12 +636,19 @@ html.cursor-active .cursor-hint.show{opacity:1}
 }
 @media (max-width:720px){
   .top-cta{display:none}
+  /* Wort-Label „Menü/Schließen" weglassen: Icon reicht, und der
+     Brand-Name behält seine Zeile (aria-label trägt den Zustand) */
+  .menu-btn-label{display:none}
   .lang{font-size:.72rem}
   .mq{rotate:-1.6deg}
   .hero{padding-bottom:70px}
   .ov-link{font-size:clamp(2.4rem, 12vw, 4rem)}
   .pc-desc{font-size:.92rem}
   .sec{padding-block:clamp(5rem,12vh,8rem)}
+}
+@media (max-width:420px){
+  .brand{font-size:1rem; gap:8px}
+  .top-right{gap:12px}
 }
 
 /* ═══════════════════════════════════════════════════════════

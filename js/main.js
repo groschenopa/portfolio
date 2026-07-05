@@ -504,7 +504,10 @@
   var menuBtn = $('#menuBtn'), ov = $('#ovmenu');
   function menuLabelRender(){
     var lab = $('.menu-btn-label');
-    if(lab) lab.textContent = I18N[curLang][menuOpen ? 'menu.close' : 'menu.label'];
+    var txt = I18N[curLang][menuOpen ? 'menu.close' : 'menu.label'];
+    if(lab) lab.textContent = txt;
+    /* Auf Mobile ist das Wort-Label ausgeblendet → Zustand hörbar machen */
+    if(menuBtn) menuBtn.setAttribute('aria-label', txt);
   }
   function setMenu(open){
     menuOpen = open;
@@ -526,6 +529,16 @@
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && menuOpen) setMenu(false);
   });
+
+  /* Impressum-Anker: das <details> im Footer vorm Anspringen öffnen,
+     sonst landet der Sprung auf zugeklapptem Inhalt */
+  var legal = $('#legal');
+  if(legal){
+    $$('a[href="#legal"]').forEach(function(a){
+      a.addEventListener('click', function(){ legal.open = true; });
+    });
+    if(location.hash === '#legal') legal.open = true;
+  }
 
   /* ═══════════════ Theme: Dark ist Standard (Design-Statement),
      Light nur über den Toggle – die Wahl wird gespeichert. ═══════════════ */

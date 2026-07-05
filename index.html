@@ -20,7 +20,7 @@
 <link rel="preload" href="assets/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* Theme früh setzen, um Flackern zu vermeiden */(function(){try{var t=localStorage.getItem('dm-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script>/* Easteregg-Skin früh wiederherstellen (Konami: Terminal-Modus) */try{if(sessionStorage.getItem('dm-egg'))document.documentElement.setAttribute('data-egg','terminal');}catch(e){}</script>
-<link rel="stylesheet" href="css/style.css?v=16">
+<link rel="stylesheet" href="css/style.css?v=17">
 </head>
 <body>
 
@@ -81,6 +81,7 @@
     <div class="ov-meta mono">
       <a href="mailto:hallo@danielmartin.fyi">hallo@danielmartin.fyi</a>
       <a href="https://www.linkedin.com/in/daniel-nicht-martin/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="#legal" data-i18n="impressum.summary">Impressum &amp; Datenschutz</a>
     </div>
   </div>
 
@@ -361,7 +362,7 @@
       <button class="to-top mono" id="toTop" type="button"><span data-i18n="foot.top">Nach oben</span> ↑</button>
     </div>
     <div class="wrap">
-      <details class="legal-details">
+      <details class="legal-details" id="legal">
         <summary data-i18n="impressum.summary">Impressum &amp; Datenschutz</summary>
         <div class="legal">
           <p><strong>Angaben gemäß § 5 DDG</strong><br>
@@ -382,6 +383,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=15"></script>
+  <script src="js/main.js?v=16"></script>
 </body>
 </html>
