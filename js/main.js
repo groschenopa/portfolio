@@ -1,8 +1,8 @@
 /* ═══════════════════════════════════════════════════════════
    BONKERS EDITION – main.js
    Eine zentrale rAF-Loop, alles Weitere sind Module:
-   i18n · Preloader · Kinetik-Typo · Canvas · Parallax ·
-   Pin-Scroll · Tilt · Magnetics · Cursor · Eggs.
+   i18n · Kinetik-Typo · Canvas · Parallax ·
+   Pin-Scroll · Tilt · Magnetics · Eggs.
    Reduced Motion legt alle Bewegung still.
    ═══════════════════════════════════════════════════════════ */
 (function(){
@@ -19,12 +19,10 @@
   var reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
   var finePtr = matchMedia('(hover:hover) and (pointer:fine)').matches;
 
-  /* Test-/Review-Parameter: ?pre=0 überspringt den Preloader,
-     ?anim=0 schaltet zusätzlich alle Transitions/Animationen ab. */
+  /* Test-/Review-Parameter: ?anim=0 schaltet Transitions/Animationen ab. */
   var qs = null;
   try{ qs = new URLSearchParams(location.search); }catch(e){}
   var noAnim = !!(qs && qs.get('anim') === '0');
-  var noPre  = noAnim || !!(qs && qs.get('pre') === '0');
   if(noAnim) docEl.classList.add('noanim');
   var qsTheme = (qs && (qs.get('theme') === 'light' || qs.get('theme') === 'dark')) ? qs.get('theme') : null;
   /* ?egg=1: Terminal-Modus direkt ansehen (Debug/Vorschau, ohne Konami) */
@@ -98,17 +96,32 @@
   /* ── Eine rAF-Loop für alles ── */
   var frameFns = [];
   function onFrame(fn){ frameFns.push(fn); }
-  (function master(t){
+  var masterFrame = 0;
+  function master(t){
+    masterFrame = 0;
     for(var i = 0; i < frameFns.length; i++) frameFns[i](t || 0);
-    requestAnimationFrame(master);
-  })(0);
+    if(!document.hidden) masterFrame = requestAnimationFrame(master);
+  }
+  function startMaster(){
+    if(!document.hidden && !masterFrame) masterFrame = requestAnimationFrame(master);
+  }
+  function syncMaster(){
+    if(document.hidden && masterFrame){
+      cancelAnimationFrame(masterFrame);
+      masterFrame = 0;
+    } else {
+      startMaster();
+    }
+  }
+  document.addEventListener('visibilitychange', syncMaster);
+  startMaster();
 
   /* ═══════════════ i18n ═══════════════
      Texte 1:1 von danielmartin.fyi übernommen.
      Werte dürfen HTML enthalten (innerHTML). Impressum bleibt rechtlich auf Deutsch. */
   var I18N = {
     de:{
-      "meta.title":"Daniel Martin – Content Strategist & AI Enablement",
+      "meta.title":"Daniel Martin – Content und AI Strategist",
       "meta.desc":"Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie für komplexe Themen, KI und Change.",
       "nav.about":"Über mich", "nav.career":"Werdegang", "nav.work":"Projekte", "nav.contact":"Kontakt", "nav.cta":"Kontakt",
       "skip.link":"Zum Inhalt springen",
@@ -116,7 +129,7 @@
       "career.srhint":"Berufliche Stationen in chronologischer Reihenfolge, die aktuellste zuerst.",
       "hero.eyebrow":"Content Strategy, Copy &amp; AI · Köln",
       "hero.l1":"Klartexten.", "hero.l2":"Vordenken.",
-      "hero.lead":"Hi! Ich bin Daniel, Content Strategist und AI-Enabler mit tiefen Wurzeln in der B2B-Kommunikation. Damit bereite ich komplexe Themen so auf, dass die richtige Zielgruppe sie versteht und nutzen kann: Deine!",
+      "hero.lead":"Hi! Ich bin Daniel, Content und AI Strategist mit tiefen Wurzeln in der B2B-Kommunikation. Damit bereite ich komplexe Themen so auf, dass die richtige Zielgruppe sie versteht und nutzen kann: Deine!",
       "hero.cta1":"So arbeite ich", "hero.cta2":"Kontakt",
       "hero.scroll":"Scroll",
       "about.num":"01 / Über mich", "about.title":"Verständlichkeit ist kein Zufall.",
@@ -151,21 +164,22 @@
       "contact.num":"04 / Kontakt", "contact.title":"Lass uns reden.",
       "contact.lead":"Content-Strategie, KI im Arbeitsalltag oder eine Transformation, die begleitet werden will: Bei dir steht etwas davon an? Dann freue ich mich über deine Nachricht.",
       "contact.mailto":"mailto:hallo@danielmartin.fyi?subject=Anfrage%20%C3%BCber%20danielmartin.fyi&body=Hallo%20Daniel%2C%0D%0A%0D%0A%0D%0AViele%20Gr%C3%BC%C3%9Fe",
+      "contact.copy":"E-Mail kopieren", "contact.copied":"E-Mail-Adresse kopiert.", "contact.copyfail":"Kopieren nicht möglich – bitte Adresse markieren.",
       "contact.time":"Ortszeit Köln",
       "foot.rights":"© 2026 Daniel Martin",
       "foot.built":"Gebaut mit HTML, CSS &amp; etwas KI. Kein Tracking, keine Cookies.",
       "foot.top":"Nach oben",
-      "img.portrait":"Daniel Martin, Content & AI Strategie, Portrait",
+      "img.portrait":"Daniel Martin, Content und AI Strategist, Portrait",
       "img.case1":"alan.de, Kommunikation für eine sichere KI-Plattform",
       "img.case2":"Reisebericht, das Corporate-Magazin für Vorreiter, Comma Soft",
       "img.case3":"palmerhargreaves, B2B-Agentur in Köln",
       "img.case4":"C-Level-Positionierung und Thought Leadership",
       "img.case5":"Messeauftritt eines Telko-Konzerns",
       "impressum.summary":"Impressum &amp; Datenschutz",
-      "aria.home":"Daniel Martin – Startseite", "aria.menu":"Menü", "aria.theme":"Hell-/Dunkelmodus umschalten"
+      "aria.home":"Daniel Martin – Startseite", "aria.menu":"Menü", "aria.theme.light":"Zum hellen Modus wechseln", "aria.theme.dark":"Zum dunklen Modus wechseln"
     },
     en:{
-      "meta.title":"Daniel Martin – Content Strategist & AI Enablement",
+      "meta.title":"Daniel Martin – Content and AI Strategist",
       "meta.desc":"Daniel Martin, content and AI strategist based in Cologne. I make complex topics clear and effective: content strategy, AI and change.",
       "nav.about":"About", "nav.career":"Career", "nav.work":"Work", "nav.contact":"Contact", "nav.cta":"Contact",
       "skip.link":"Skip to content",
@@ -173,7 +187,7 @@
       "career.srhint":"Career stations in chronological order, most recent first.",
       "hero.eyebrow":"Content Strategy, Copy &amp; AI · Cologne",
       "hero.l1":"Make it clear.", "hero.l2":"Make it count.",
-      "hero.lead":"Hi! I'm Daniel, a content strategist and AI enabler with deep roots in B2B communications. That's how I shape complex topics so the right audience understands and can use them: yours.",
+      "hero.lead":"Hi! I'm Daniel, a content and AI strategist with deep roots in B2B communications. That's how I shape complex topics so the right audience understands and can use them: yours.",
       "hero.cta1":"How I work", "hero.cta2":"Get in touch",
       "hero.scroll":"Scroll",
       "about.num":"01 / About", "about.title":"Clarity is no accident.",
@@ -208,18 +222,19 @@
       "contact.num":"04 / Contact", "contact.title":"Let's talk.",
       "contact.lead":"Content strategy, AI in day-to-day work, or support with change: is one of those on your agenda right now? Then I'd be glad to hear from you.",
       "contact.mailto":"mailto:hallo@danielmartin.fyi?subject=Inquiry%20via%20danielmartin.fyi&body=Hi%20Daniel%2C%0D%0A%0D%0A%0D%0ABest%20regards",
+      "contact.copy":"Copy email", "contact.copied":"Email address copied.", "contact.copyfail":"Could not copy – please select the address.",
       "contact.time":"Cologne local time",
       "foot.rights":"© 2026 Daniel Martin",
       "foot.built":"Built with HTML, CSS &amp; a little AI. No tracking, no cookies.",
       "foot.top":"Back to top",
-      "img.portrait":"Daniel Martin, content & AI strategy, portrait",
+      "img.portrait":"Daniel Martin, content and AI strategist, portrait",
       "img.case1":"alan.de, communications for a secure AI platform",
       "img.case2":"Reisebericht, the corporate magazine for frontrunners, Comma Soft",
       "img.case3":"palmerhargreaves, B2B agency in Cologne",
       "img.case4":"C-level positioning and thought leadership",
       "img.case5":"Trade-fair presence of a telco group",
       "impressum.summary":"Imprint &amp; Privacy",
-      "aria.home":"Daniel Martin – home", "aria.menu":"Menu", "aria.theme":"Toggle light/dark mode"
+      "aria.home":"Daniel Martin – home", "aria.menu":"Menu", "aria.theme.light":"Switch to light mode", "aria.theme.dark":"Switch to dark mode"
     }
   };
 
@@ -259,8 +274,11 @@
     var md = $('meta[name="description"]');
     if(md && dict['meta.desc']) md.setAttribute('content', dict['meta.desc']);
     $$('.lang button').forEach(function(b){
-      b.classList.toggle('active', b.getAttribute('data-lang') === curLang);
+      var active = b.getAttribute('data-lang') === curLang;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', String(active));
     });
+    renderThemeButtons();
     try{ localStorage.setItem('dm-lang', curLang); }catch(e){}
     refresh();
   }
@@ -434,39 +452,12 @@
     splitEls.forEach(function(el){ io.observe(el); });
   }
 
-  /* ═══════════════ Preloader ═══════════════ */
+  /* ═══════════════ Seiteneinstieg ═══════════════ */
   function startPage(){
     kinIntro();
     initReveals();
   }
-  (function initPre(){
-    var pre = $('#preloader');
-    var skip = reduced || noPre;
-    try{ skip = skip || sessionStorage.getItem('dm-pre') === '1'; }catch(e){}
-    if(!pre || skip){
-      if(pre) pre.remove();
-      startPage();
-      return;
-    }
-    document.body.style.overflow = 'hidden';
-    pre.classList.add('tick');
-    var count = $('#preCount'), bar = $('#preBar');
-    var t0 = performance.now(), DUR = 1150;
-    (function step(){
-      var p = clamp((performance.now() - t0) / DUR, 0, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      if(count) count.textContent = String(Math.round(e * 100)).padStart(3, '0');
-      if(bar) bar.style.width = (e * 100) + '%';
-      if(p < 1){ requestAnimationFrame(step); }
-      else{
-        try{ sessionStorage.setItem('dm-pre', '1'); }catch(err){}
-        pre.classList.add('done');
-        document.body.style.overflow = '';
-        setTimeout(startPage, 240);
-        setTimeout(function(){ pre.remove(); }, 1100);
-      }
-    })();
-  })();
+  startPage();
 
   /* ═══════════════ Topbar: Scroll-Status + Hide-on-Scroll ═══════════════ */
   var topbar = $('#topbar');
@@ -502,6 +493,8 @@
 
   /* ═══════════════ Fullscreen-Menü ═══════════════ */
   var menuBtn = $('#menuBtn'), ov = $('#ovmenu');
+  var menuBackground = [$('#main'), $('.footer'), $('.skip-link'), $('.brand'), $('.top-status')]
+    .concat($$('.top-right > :not(.menu-btn)')).filter(Boolean);
   function menuLabelRender(){
     var lab = $('.menu-btn-label');
     var txt = I18N[curLang][menuOpen ? 'menu.close' : 'menu.label'];
@@ -509,25 +502,38 @@
     /* Auf Mobile ist das Wort-Label ausgeblendet → Zustand hörbar machen */
     if(menuBtn) menuBtn.setAttribute('aria-label', txt);
   }
-  function setMenu(open){
+  function setMenu(open, restoreFocus){
     menuOpen = open;
     ov.classList.toggle('open', open);
     document.body.classList.toggle('menu-open', open);
     menuBtn.setAttribute('aria-expanded', String(open));
     ov.setAttribute('aria-hidden', String(!open));
+    menuBackground.forEach(function(el){ el.inert = open; });
     menuLabelRender();
     if(open){
       setTimeout(function(){ var f = $('.ov-link'); if(f) f.focus(); }, 450);
-    } else {
+    } else if(restoreFocus !== false) {
       menuBtn.focus();
     }
   }
   menuBtn.addEventListener('click', function(){ setMenu(!menuOpen); });
   $$('.ov-link, .ov-meta a', ov).forEach(function(a){
-    a.addEventListener('click', function(){ setMenu(false); });
+    a.addEventListener('click', function(){ setMenu(false, false); });
   });
   document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && menuOpen) setMenu(false);
+    if(!menuOpen) return;
+    if(e.key === 'Escape'){
+      setMenu(false);
+      return;
+    }
+    if(e.key === 'Tab'){
+      var focusable = $$('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])', ov)
+        .filter(function(el){ return el.offsetParent !== null; });
+      if(!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
   });
 
   /* Impressum-Anker: das <details> im Footer vorm Anspringen öffnen,
@@ -549,10 +555,21 @@
     var m = $('meta[name="theme-color"]');
     if(m) m.setAttribute('content', effectiveTheme() === 'dark' ? '#0A0A0D' : '#FBFAF7');
   }
+  function renderThemeButtons(){
+    var target = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    var dict = I18N[curLang] || I18N.de;
+    var label = dict['aria.theme.' + target];
+    $$('[data-theme-toggle]').forEach(function(btn){
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+      btn.setAttribute('aria-pressed', String(effectiveTheme() === 'light'));
+    });
+  }
   function applyTheme(theme){
     if(theme === 'dark' || theme === 'light') docEl.setAttribute('data-theme', theme);
     else docEl.removeAttribute('data-theme');
     updateThemeMeta();
+    renderThemeButtons();
     themeHooks.forEach(function(fn){ fn(); });
   }
   (function initTheme(){
@@ -561,14 +578,13 @@
     try{ saved = localStorage.getItem('dm-theme'); }catch(e){}
     applyTheme(saved === 'dark' || saved === 'light' ? saved : null);
   })();
-  var themeBtn = $('#themeToggle');
-  if(themeBtn){
+  $$('[data-theme-toggle]').forEach(function(themeBtn){
     themeBtn.addEventListener('click', function(){
       var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
       applyTheme(next);
       try{ localStorage.setItem('dm-theme', next); }catch(e){}
     });
-  }
+  });
 
   /* ═══════════════ Hero-Canvas: driftende Farbfelder ═══════════════ */
   var heroVis = true;
@@ -737,56 +753,7 @@
         dist = Math.max(0, pinTrack.scrollWidth - innerWidth);
         pinSec.style.height = (innerHeight + dist) + 'px';
         on = dist > 0;
-        calcSnaps();
       }
-      /* Rastpunkte: scrollY-Werte, bei denen Karte i zentriert steht.
-         Die Endcard ist bewusst KEIN eigener Stopp – sie wird auf der
-         Fahrt zum Kontaktblock nur passiert. */
-      var snapPoints = [];
-      function calcSnaps(){
-        snapPoints = [];
-        if(!on) return;
-        var secTop = pinSec.getBoundingClientRect().top + window.scrollY;
-        $$('article.pcard', pinTrack).forEach(function(card){
-          var x = clamp(card.offsetLeft - (innerWidth - card.offsetWidth) / 2, 0, dist);
-          snapPoints.push(Math.round(secTop + x));
-        });
-      }
-      function nearestSnap(y){
-        var best = 0, bd = Infinity;
-        for(var i = 0; i < snapPoints.length; i++){
-          var d = Math.abs(snapPoints[i] - y);
-          if(d < bd){ bd = d; best = i; }
-        }
-        return best;
-      }
-
-      /* Eigener Scroll-Animator (Best Practice à la fullPage/Lenis):
-         window.scrollTo({behavior:'smooth'}) wird von Trackpad-Momentum
-         abgebrochen und strandet zwischen den Karten. Ein rAF-Animator,
-         der die Position jeden Frame instant setzt, ist nicht abbrechbar
-         und hat eine feste, planbare Dauer. */
-      var scrollAnim = null;
-      function animateScroll(to, dur){
-        scrollAnim = {from: window.scrollY, to: to, t0: performance.now(), dur: dur || 560};
-      }
-      function scrollAnimating(){ return !!scrollAnim; }
-      onFrame(function(){
-        if(!scrollAnim) return;
-        var p = clamp((performance.now() - scrollAnim.t0) / scrollAnim.dur, 0, 1);
-        var e = 1 - Math.pow(1 - p, 3);
-        window.scrollTo(0, Math.round(scrollAnim.from + (scrollAnim.to - scrollAnim.from) * e));
-        if(p >= 1) scrollAnim = null;
-      });
-      /* Gegenscrollen bricht nur den langen Zonen-Snap ab (außerhalb der
-         Karten-Strecke) – die kurzen Karten-Steps laufen immer zu Ende. */
-      window.addEventListener('wheel', function(e){
-        if(!scrollAnim || !e.deltaY) return;
-        var y = window.scrollY;
-        var inStrip = snapPoints.length && y >= snapPoints[0] - 8 && y <= snapPoints[snapPoints.length - 1] + 8;
-        if(inStrip) return;
-        if((e.deltaY > 0) !== (scrollAnim.to > scrollAnim.from)) scrollAnim = null;
-      }, {passive:true});
       pinMetricsFn = metrics;
       metrics();
       if(mq.addEventListener) mq.addEventListener('change', metrics);
@@ -828,98 +795,6 @@
         window.scrollTo({top: secTop + x, behavior:'instant' in window ? 'instant' : 'auto'});
       });
 
-      /* Scroll-Snap: wer nach der Pin-Strecke weiterscrollt, wird smooth,
-         aber resolut zum Kontakt geführt (und rückwärts zur letzten Karte) –
-         keine hängende Zwischenansicht. Nur bei echtem User-Scroll, nicht
-         bei Anker-Navigation; Gegenscrollen bricht den Snap nativ ab. */
-      if(!reduced){
-        (function(){
-          var userScroll = false, usT = null, lastY = window.scrollY;
-          function markUser(){
-            userScroll = true;
-            clearTimeout(usT);
-            usT = setTimeout(function(){ userScroll = false; }, 300);
-          }
-          window.addEventListener('wheel', markUser, {passive:true});
-          window.addEventListener('touchmove', markUser, {passive:true});
-          onFrame(function(){
-            var y = window.scrollY, dir = y - lastY;
-            lastY = y;
-            if(scrollAnimating()) return;
-            if(!on || !userScroll || Math.abs(dir) < 1) return;
-            var contact = document.getElementById('contact');
-            if(!contact) return;
-            var cTop = Math.round(contact.getBoundingClientRect().top + y);
-            var pinEnd = cTop - innerHeight; /* Pin ist exakt hier fertig */
-            if(y > pinEnd + 50 && y < cTop - 50){
-              /* Runter → Kontakt; hoch → direkt zur letzten Projektkarte
-                 (die Endcard ist kein eigener Halt) */
-              animateScroll(dir > 0 ? cTop : (snapPoints.length ? snapPoints[snapPoints.length - 1] : pinEnd), 640);
-            }
-          });
-        })();
-      }
-
-      /* Karten-Snapping: ein Scroll-Vorgang rastet genau eine Karte weiter.
-         Ausstiege bleiben frei: erste Karte + hoch bzw. Endcard + runter
-         scrollen nativ aus der Strecke heraus (kein Scroll-Käfig). */
-      if(finePtr && !reduced){
-        (function(){
-          /* Kernprinzip: Steps passieren NUR aus dem Stand. Solange der
-             Animator läuft, wird jedes Wheel-Event geschluckt – dadurch
-             ist ein Step immer exakt eine Karte weit, und der Animator
-             selbst ist durch Momentum nicht abbrechbar. */
-          var lastWheelT = 0, lastMag = 0, armed = true, acc = 0;
-          window.addEventListener('wheel', function(e){
-            if(!on || !snapPoints.length || !e.deltaY || e.ctrlKey) return;
-            var y = window.scrollY;
-            var first = snapPoints[0], last = snapPoints[snapPoints.length - 1];
-            if(y < first - 8 || y > last + 8) return;    /* außerhalb der Strecke */
-            var now = performance.now();
-            var mag = Math.abs(e.deltaY);
-            if(scrollAnimating()){
-              e.preventDefault();
-              lastWheelT = now; lastMag = mag; armed = false;
-              return;
-            }
-            var dir = e.deltaY > 0 ? 1 : -1;
-            var idx = nearestSnap(y);
-            if(idx === 0 && dir < 0) return;             /* Ausstieg nach oben */
-            e.preventDefault();
-            /* Neue Geste: Event-Pause oder deutlicher Kraft-Sprung gegen
-               das auslaufende Momentum */
-            var gap = now - lastWheelT;
-            if(gap > 120 || mag > lastMag * 1.8 + 8){ armed = true; acc = 0; }
-            lastWheelT = now; lastMag = mag;
-            if(!armed) return;
-            acc += e.deltaY;
-            if(Math.abs(acc) < 6) return;                /* nur Mikro-Jitter filtern */
-            armed = false; acc = 0;
-            if(idx === snapPoints.length - 1 && dir > 0){
-              /* Letzte Karte + runter: an der Endcard vorbei direkt zum Kontakt */
-              var contact = document.getElementById('contact');
-              if(contact) animateScroll(Math.round(contact.getBoundingClientRect().top + y), 760);
-              return;
-            }
-            animateScroll(snapPoints[clamp(idx + dir, 0, snapPoints.length - 1)], 540);
-          }, {passive:false});
-
-          /* Fangnetz für Tastatur/Scrollbar: bei Scroll-Ruhe auf der
-             nächstgelegenen Karte einrasten */
-          var idleT = 0, lastIdleY = -1;
-          onFrame(function(){
-            if(!on || !snapPoints.length) return;
-            var y = window.scrollY;
-            if(y !== lastIdleY){ lastIdleY = y; idleT = performance.now(); return; }
-            if(scrollAnimating()) return;
-            if(performance.now() - idleT < 220) return;
-            var first = snapPoints[0], last = snapPoints[snapPoints.length - 1];
-            if(y <= first + 4 || y >= last - 4) return;
-            var target = snapPoints[nearestSnap(y)];
-            if(Math.abs(target - y) > 8) animateScroll(target, 540);
-          });
-        })();
-      }
     })();
   }
 
@@ -998,42 +873,38 @@
     setInterval(tick, 1000);
   })();
 
-  /* ═══════════════ Follower-Cursor (Blend-Difference) ═══════════════ */
+  /* ═══════════════ E-Mail-Adresse kopieren ═══════════════ */
   (function(){
-    if(!finePtr || reduced) return;
-    var ring = document.createElement('div'); ring.className = 'cursor-ring'; ring.setAttribute('aria-hidden', 'true');
-    var dot  = document.createElement('div'); dot.className  = 'cursor-dot';  dot.setAttribute('aria-hidden', 'true');
-    var hint = document.createElement('div'); hint.className = 'cursor-hint'; hint.textContent = '↑↑↓↓…'; hint.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(ring); document.body.appendChild(dot); document.body.appendChild(hint);
-    docEl.classList.add('has-cursor');
-    var rx = innerWidth / 2, ry = innerHeight / 2;
-    function place(el, x, y){ el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%)'; }
-    document.addEventListener('mousemove', function(e){
-      place(dot, e.clientX, e.clientY);
-      hint.style.transform = 'translate3d(' + (e.clientX + 16) + 'px,' + (e.clientY + 16) + 'px,0)';
-      if(!docEl.classList.contains('cursor-active')) docEl.classList.add('cursor-active');
-    }, {passive:true});
-    onFrame(function(){
-      if(mx < -9000) return;
-      rx = lerp(rx, mx, .2); ry = lerp(ry, my, .2);
-      place(ring, rx, ry);
+    var btn = $('#copyMail'), status = $('#copyStatus');
+    if(!btn) return;
+    var address = 'hallo@danielmartin.fyi';
+    function legacyCopy(){
+      var field = document.createElement('textarea');
+      field.value = address;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(e){}
+      field.remove();
+      return ok;
+    }
+    function feedback(ok){
+      var dict = I18N[curLang] || I18N.de;
+      var message = dict[ok ? 'contact.copied' : 'contact.copyfail'];
+      btn.textContent = message;
+      if(status) status.textContent = message;
+      setTimeout(function(){ btn.textContent = (I18N[curLang] || I18N.de)['contact.copy']; }, 1800);
+    }
+    btn.addEventListener('click', function(){
+      if(navigator.clipboard && window.isSecureContext){
+        navigator.clipboard.writeText(address).then(function(){ feedback(true); }, function(){ feedback(legacyCopy()); });
+      } else {
+        feedback(legacyCopy());
+      }
     });
-    var inter = 'a, button, [role="button"], input, textarea, select, label, summary';
-    document.addEventListener('mouseover', function(e){
-      var t = e.target;
-      var on = t && t.closest ? t.closest(inter) : null;
-      ring.classList.toggle('is-hover', !!on);
-      dot.classList.toggle('is-hover', !!on);
-      /* Über der invertierten Fläche (Light Mode) auf hellen Cursor wechseln */
-      var inv = !!(t && t.closest && t.closest('.invert')) && effectiveTheme() === 'light';
-      ring.classList.toggle('on-invert', inv);
-      dot.classList.toggle('on-invert', inv);
-      hint.classList.toggle('show', !!(t && t.closest && t.closest('.geek')));
-    });
-    document.addEventListener('mousedown', function(){ ring.classList.add('is-down'); });
-    document.addEventListener('mouseup',   function(){ ring.classList.remove('is-down'); });
-    document.addEventListener('mouseleave', function(){ docEl.classList.remove('cursor-active'); });
-    document.addEventListener('mouseenter', function(){ docEl.classList.add('cursor-active'); });
   })();
 
   /* ═══════════════ Nach oben ═══════════════ */
@@ -1084,9 +955,6 @@
   $$('.lang button').forEach(function(b){
     b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
   });
-
-  /* ═══════════════ Rechtsklick-Kontextmenü deaktivieren (wie Original) ═══════════════ */
-  document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 
   /* ═══════════════ Easteregg: Konsolen-Gruß ═══════════════ */
   console.log(

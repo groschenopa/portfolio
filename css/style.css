@@ -27,9 +27,6 @@
   --pg1:#11565F; --pg2:#0A3B42; --pg3:#041B1F;
   --canvas-op:.5;
   --grain-op:.05;
-  /* Cursor: im Dunkeln Blend-Difference, im Hellen Ink-Ring (Difference über Türkis kippt ins Braune) */
-  --cur-blend:difference; --cur-col:#fff;
-  --cur-hover-bg:#fff; --cur-hover-bd:#fff;
   /* Button-Hover: dunkel → heller, hell → dunkler (hält den Text-Kontrast) */
   --acc-hover:#A9DBDF;
 
@@ -51,8 +48,6 @@
   --acc:#0C6B74; --acc-deep:#0A5760; --acc-soft:#7CC7CF; --acc-ink:#FFFFFF;
   --pg1:#9FDCE2; --pg2:#4FAEB9; --pg3:#16717C;
   --canvas-op:.52; --grain-op:.05;
-  --cur-blend:normal; --cur-col:#131316;
-  --cur-hover-bg:rgba(19,19,22,.08); --cur-hover-bd:#131316;
   --acc-hover:#0A5760;
 }
 
@@ -110,23 +105,6 @@ html.noanim .kin .ch{transform:none !important}
   80%{transform:translate(22px,18px)} 100%{transform:translate(0,0)}
 }
 @media (prefers-reduced-motion:reduce){.grain{animation:none}}
-
-/* ── Preloader ── */
-.preloader{
-  position:fixed; inset:0; z-index:9999; background:var(--bg);
-  display:flex; align-items:center; justify-content:center;
-  transition:clip-path .85s var(--ease-inout), visibility 0s linear .85s;
-  clip-path:inset(0 0 0 0);
-}
-.preloader.done{clip-path:inset(0 0 100% 0); visibility:hidden}
-.pre-inner{display:flex; flex-direction:column; align-items:center; gap:26px}
-.pre-mark{width:clamp(72px,10vw,120px); height:auto; color:var(--acc); opacity:0; transform:scale(.85); transition:opacity .5s ease, transform .8s var(--ease-out)}
-.preloader.tick .pre-mark{opacity:1; transform:none}
-.pre-count{font-family:var(--font-mono); font-size:clamp(1rem,2vw,1.3rem); letter-spacing:.18em; color:var(--ink-2); font-variant-numeric:tabular-nums}
-.pre-bar{position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--line)}
-.pre-bar span{display:block; height:100%; width:0; background:var(--acc); transition:width .12s linear}
-.no-js .preloader{display:none}
-@media (prefers-reduced-motion:reduce){.preloader{display:none}}
 
 /* ── Topbar ── */
 .topbar{
@@ -198,6 +176,7 @@ body.menu-open .menu-btn-icon i:last-child{width:100%; transform:translateY(-4px
 .ovmenu.open .ov-meta{opacity:1}
 .ov-meta a{text-decoration:none}
 .ov-meta a:hover{color:var(--acc)}
+.ov-mobile-controls{display:none; align-items:center; gap:12px; position:relative; z-index:1; margin-top:28px}
 
 /* ── HERO ── */
 .hero{
@@ -517,11 +496,6 @@ body.menu-open .menu-btn-icon i:last-child{width:100%; transform:translateY(-4px
   --acc:#34B7C4; --acc-deep:#0C6B74; --acc-ink:#06090A;
   background:var(--bg); color:var(--ink);
 }
-/* Cursor über der invertierten Fläche (nur Light relevant, JS toggelt) */
-.cursor-ring.on-invert{border-color:#F2F0EA}
-.cursor-dot.on-invert{background:#F2F0EA}
-.cursor-ring.is-hover.on-invert{background:rgba(242,240,234,.16); border-color:#F2F0EA}
-
 /* ── Kontakt ── */
 .sec-contact{padding-bottom:clamp(4rem,9vh,7rem)}
 .sec-contact::before{ /* Petrol-Glow hinter der Mega-Zeile */
@@ -546,8 +520,9 @@ body.menu-open .menu-btn-icon i:last-child{width:100%; transform:translateY(-4px
 .mail-mega:hover .mail-arrow{transform:translate(6px,-6px)}
 .contact-meta{display:flex; flex-wrap:wrap; gap:16px 40px; margin-top:clamp(2.6rem,6vh,4rem); font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:var(--ink-2)}
 .contact-meta a{text-decoration:none}
-.contact-meta a:hover{color:var(--acc)}
+.contact-meta a:hover, .contact-meta button:hover{color:var(--acc)}
 .contact-meta b{color:var(--ink); font-weight:500; font-variant-numeric:tabular-nums}
+.copy-mail{border:0; padding:0; background:none; color:inherit; font:inherit; text-transform:inherit; letter-spacing:inherit; cursor:pointer}
 
 /* ── Footer ── */
 .footer{border-top:1px solid var(--line); position:relative}
@@ -577,34 +552,6 @@ body.menu-open{overflow:hidden}
    (steht bewusst spät im Stylesheet und nennt alle Übergänge,
    damit Hover-Farbwechsel der Buttons erhalten bleiben) */
 [data-magnetic]{transition:transform .55s var(--ease-out), color .3s ease, background .3s ease, border-color .3s ease}
-
-/* ── Follower-Cursor (Blend-Difference) ── */
-@media (hover:hover) and (pointer:fine){
-  html.has-cursor, html.has-cursor *{cursor:none}
-}
-.cursor-ring, .cursor-dot{
-  position:fixed; top:0; left:0; z-index:9990; pointer-events:none;
-  border-radius:50%; opacity:0; will-change:transform;
-  mix-blend-mode:var(--cur-blend, difference);
-}
-.cursor-ring{
-  width:36px; height:36px; border:1.5px solid var(--cur-col,#fff); background:transparent;
-  transition:width .25s var(--ease-out), height .25s var(--ease-out), background-color .25s ease, border-color .25s ease, opacity .25s ease;
-}
-.cursor-dot{width:6px; height:6px; background:var(--cur-col,#fff); transition:opacity .25s ease}
-html.cursor-active .cursor-ring, html.cursor-active .cursor-dot{opacity:1}
-.cursor-ring.is-hover{width:64px; height:64px; background:var(--cur-hover-bg,#fff); border-color:var(--cur-hover-bd,#fff)}
-.cursor-dot.is-hover{opacity:0}
-.cursor-ring.is-down{width:28px; height:28px}
-.cursor-hint{
-  position:fixed; top:0; left:0; z-index:9991; pointer-events:none; opacity:0;
-  background:var(--acc); color:var(--acc-ink);
-  font-family:var(--font-display); font-weight:600; font-size:.8rem; letter-spacing:.06em;
-  padding:5px 11px; border-radius:999px; white-space:nowrap;
-  box-shadow:0 8px 22px color-mix(in srgb, var(--acc) 38%, transparent);
-  transition:opacity .2s ease;
-}
-html.cursor-active .cursor-hint.show{opacity:1}
 
 /* ── Easteregg: Konami → Scramble-Welle + Mono-Toast ── */
 .egg-toast{
@@ -650,6 +597,11 @@ html.cursor-active .cursor-hint.show{opacity:1}
   .brand{font-size:1rem; gap:8px}
   .top-right{gap:12px}
 }
+@media (max-width:380px){
+  .topbar{gap:14px}
+  .topbar .lang, .topbar .theme-toggle{display:none}
+  .ov-mobile-controls{display:flex}
+}
 
 /* ═══════════════════════════════════════════════════════════
    Easteregg „Terminal-Modus": Der Konami-Code schaltet einen
@@ -665,8 +617,6 @@ html.cursor-active .cursor-hint.show{opacity:1}
   --pg1:#12604F; --pg2:#0A3B32; --pg3:#03110D;
   --canvas-op:.4; --grain-op:.1;
   --acc-hover:#C9FBEF;
-  --cur-blend:difference; --cur-col:#fff;
-  --cur-hover-bg:#fff; --cur-hover-bd:#fff;
   --font-display:var(--font-mono);
 }
 :root[data-egg="terminal"] body{font-family:var(--font-mono)}
