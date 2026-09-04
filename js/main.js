@@ -167,7 +167,7 @@
       "contact.copy":"E-Mail kopieren", "contact.copied":"E-Mail-Adresse kopiert.", "contact.copyfail":"Kopieren nicht möglich – bitte Adresse markieren.",
       "contact.time":"Ortszeit Köln",
       "foot.rights":"© 2026 Daniel Martin",
-      "foot.built":"Gebaut mit HTML, CSS &amp; etwas KI. Kein Tracking, keine Cookies.",
+      "foot.built":"Gebaut mit HTML, CSS &amp; etwas KI. Ohne Cookies und Tracking.",
       "foot.top":"Nach oben",
       "img.portrait":"Daniel Martin, Content und AI Strategist, Portrait",
       "img.case1":"alan.de, Kommunikation für eine sichere KI-Plattform",
