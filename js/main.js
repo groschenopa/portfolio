@@ -225,7 +225,7 @@
       "contact.copy":"Copy email", "contact.copied":"Email address copied.", "contact.copyfail":"Could not copy – please select the address.",
       "contact.time":"Cologne local time",
       "foot.rights":"© 2026 Daniel Martin",
-      "foot.built":"Built with HTML, CSS &amp; a little AI. No tracking, no cookies.",
+      "foot.built":"Built with HTML, CSS &amp; a little AI. Without cookies or tracking.",
       "foot.top":"Back to top",
       "img.portrait":"Daniel Martin, content and AI strategist, portrait",
       "img.case1":"alan.de, communications for a secure AI platform",
