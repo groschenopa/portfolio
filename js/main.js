@@ -141,7 +141,7 @@
       "about.b3t":"Und wenn ich afk bin?",
       "about.b3d":"Dann findest du mich auf dem Badminton-Court, im Kino oder in der nächsten Multiplayer-Lobby. Bekennender <span class='geek'>Geek</span>, lange vor ChatGPT.",
       "career.num":"02 / Werdegang", "career.title":"Wo ich herkomme.",
-      "career.lead":"Vier Stationen, ein roter Faden: komplexe Themen verständlich machen.",
+      "career.lead":"Ein roter Faden durch jede Station: komplexe Themen verständlich machen.",
       "cv1.year":"seit 2026", "cv1.org":"Convidera, Köln", "cv1.role":"AI Content Marketing Lead",
       "cv2.year":"2025–26", "cv2.org":"Comma Soft, Bonn", "cv2.role":"Senior Redakteur, Content &amp; Kampagnen",
       "cv3.year":"2019–25", "cv3.org":"palmerhargreaves, Köln", "cv3.role":"Editor → Senior Editor · B2B-Agentur",
@@ -150,6 +150,7 @@
       "work.num":"03 / Projekte", "work.title":"Ausgewählte Projekte.",
       "work.intro":"Fünf Beispiele, wie Content, KI und Change in der Praxis zusammenspielen.",
       "work.more":"Weitere Projekte anzeigen", "work.less":"Weniger anzeigen",
+      "work.skip":"Zum Kontakt",
       "case1.title":"Relaunch alan.de", "case1.meta":"GenAI-Plattform · SEA · Leadstrecken · PR",
       "case1.desc":"Alan ist die souveräne, in Deutschland gehostete KI-Plattform für Unternehmen und KRITIS. Für den Relaunch habe ich alle Inhalte verantwortet: von SEA-Copy und Leadstrecken bis zu Blog, Social und PR.",
       "case2.title":"Corporate-Magazin „Reisebericht“", "case2.meta":"Comma Soft · Redaktionsleitung · KI-Workflow",
@@ -166,7 +167,7 @@
       "contact.mailto":"mailto:hallo@danielmartin.fyi?subject=Anfrage%20%C3%BCber%20danielmartin.fyi&body=Hallo%20Daniel%2C%0D%0A%0D%0A%0D%0AViele%20Gr%C3%BC%C3%9Fe",
       "contact.copy":"E-Mail kopieren", "contact.copied":"E-Mail-Adresse kopiert.", "contact.copyfail":"Kopieren nicht möglich – bitte Adresse markieren.",
       "contact.time":"Ortszeit Köln",
-      "foot.rights":"© 2026 Daniel Martin",
+      "foot.rights":"© %Y Daniel Martin",
       "foot.built":"Gebaut mit HTML, CSS &amp; etwas KI. Ohne Cookies und Tracking.",
       "foot.top":"Nach oben",
       "img.portrait":"Daniel Martin, Content und AI Strategist, Portrait",
@@ -176,6 +177,12 @@
       "img.case4":"C-Level-Positionierung und Thought Leadership",
       "img.case5":"Messeauftritt eines Telko-Konzerns",
       "impressum.summary":"Impressum &amp; Datenschutz",
+      "legal.langnote":"",
+      "skills.items":"Content-Strategie|Redaktion|PR|CEO-Ghostwriting|SEO &amp; SEA|KI-Enablement|GenAI-Workflows|Change Management|Agile",
+      "skills.srlist":"Schwerpunkte: Content-Strategie, Redaktion, PR, CEO-Ghostwriting, SEO &amp; SEA, KI-Enablement, GenAI-Workflows, Change Management und agile Zusammenarbeit.",
+      "egg.toast":"Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)",
+      "egg.console1":"Moin. Du liest den Quelltext?",
+      "egg.console2":"Dann verstehen wir uns vermutlich gut.  →  hallo@danielmartin.fyi",
       "aria.home":"Daniel Martin – Startseite", "aria.menu":"Menü", "aria.theme.light":"Zum hellen Modus wechseln", "aria.theme.dark":"Zum dunklen Modus wechseln"
     },
     en:{
@@ -199,15 +206,16 @@
       "about.b3t":"And when I'm afk?",
       "about.b3d":"You'll find me on the badminton court, at the cinema, or in the next multiplayer lobby. I was a <span class='geek'>geek</span> long before ChatGPT.",
       "career.num":"02 / Career", "career.title":"Where I'm coming from.",
-      "career.lead":"Four stops, one thread: making complex topics clear.",
+      "career.lead":"One thread through every stop: making complex topics clear.",
       "cv1.year":"since 2026", "cv1.org":"Convidera, Cologne", "cv1.role":"AI Content Marketing Lead",
       "cv2.year":"2025–26", "cv2.org":"Comma Soft, Bonn", "cv2.role":"Senior Editor, Content &amp; Campaigns",
       "cv3.year":"2019–25", "cv3.org":"palmerhargreaves, Cologne", "cv3.role":"Editor → Senior Editor · B2B agency",
       "cv4.year":"2015–19", "cv4.org":"next level, Cologne", "cv4.role":"Online editorial &amp; marketing",
-      "cv5.year":"2011–18", "cv5.org":"Cologne &amp; Bonn University", "cv5.role":"B.A. Media &amp; Culture Studies, M.A. Media Studies",
+      "cv5.year":"2011–18", "cv5.org":"Universities of Cologne &amp; Bonn", "cv5.role":"B.A. Media &amp; Culture Studies, M.A. Media Studies",
       "work.num":"03 / Work", "work.title":"Selected work.",
       "work.intro":"Five examples of how content, AI and change come together in practice.",
       "work.more":"Show more projects", "work.less":"Show fewer",
+      "work.skip":"Skip to contact",
       "case1.title":"alan.de relaunch", "case1.meta":"GenAI platform · SEA · lead funnels · PR",
       "case1.desc":"Alan is the sovereign, German-hosted AI platform for enterprises and critical-infrastructure (KRITIS) operators. For the relaunch I owned all content: from SEA copy and lead funnels to blog, social and PR.",
       "case2.title":"'Reisebericht' corporate magazine", "case2.meta":"Comma Soft · editorial lead · AI workflow",
@@ -224,7 +232,7 @@
       "contact.mailto":"mailto:hallo@danielmartin.fyi?subject=Inquiry%20via%20danielmartin.fyi&body=Hi%20Daniel%2C%0D%0A%0D%0A%0D%0ABest%20regards",
       "contact.copy":"Copy email", "contact.copied":"Email address copied.", "contact.copyfail":"Could not copy – please select the address.",
       "contact.time":"Cologne local time",
-      "foot.rights":"© 2026 Daniel Martin",
+      "foot.rights":"© %Y Daniel Martin",
       "foot.built":"Built with HTML, CSS &amp; a little AI. Without cookies or tracking.",
       "foot.top":"Back to top",
       "img.portrait":"Daniel Martin, content and AI strategist, portrait",
@@ -234,11 +242,19 @@
       "img.case4":"C-level positioning and thought leadership",
       "img.case5":"Trade-fair presence of a telco group",
       "impressum.summary":"Imprint &amp; Privacy",
+      "legal.langnote":"Imprint and privacy policy are provided in German, as German law requires.",
+      "skills.items":"Content strategy|Editorial|PR|CEO ghostwriting|SEO &amp; SEA|AI enablement|GenAI workflows|Change management|Agile",
+      "skills.srlist":"Focus areas: content strategy, editorial work, PR, CEO ghostwriting, SEO &amp; SEA, AI enablement, GenAI workflows, change management and agile collaboration.",
+      "egg.toast":"Deal — happy to talk 🎮 and 📽️ first… ;-)",
+      "egg.console1":"Moin. Reading the source?",
+      "egg.console2":"Then we'll probably get along.  →  hallo@danielmartin.fyi",
       "aria.home":"Daniel Martin – home", "aria.menu":"Menu", "aria.theme.light":"Switch to light mode", "aria.theme.dark":"Switch to dark mode"
     }
   };
 
   var curLang = 'de';
+
+  var THIS_YEAR = String(new Date().getFullYear());
 
   function applyLang(lang){
     var dict = I18N[lang] || I18N.de;
@@ -246,7 +262,7 @@
     docEl.lang = curLang;
     $$('[data-i18n]').forEach(function(el){
       var v = dict[el.getAttribute('data-i18n')];
-      if(v != null) el.innerHTML = v;
+      if(v != null) el.innerHTML = v.replace('%Y', THIS_YEAR);
     });
     /* Frisch gesetzte Titel als Split-Quelle sichern */
     splitEls.forEach(function(el){ el.dataset.orig = el.textContent.replace(/\s+/g, ' ').trim(); });
@@ -270,6 +286,13 @@
       var v = dict[el.getAttribute('data-i18n-aria')];
       if(v != null) el.setAttribute('aria-label', v);
     });
+    /* Marquee folgt der Sprache; bleibt dekorativ (aria-hidden),
+       die zugängliche Fassung ist die sr-only-Liste daneben */
+    var mqTrack = $('#mqTrack');
+    if(mqTrack && dict['skills.items']){
+      var seq = dict['skills.items'].split('|').map(function(t){ return '<span>' + t + '</span><b>✳</b>'; }).join('');
+      mqTrack.innerHTML = seq + seq;
+    }
     if(dict['meta.title']) document.title = dict['meta.title'];
     var md = $('meta[name="description"]');
     if(md && dict['meta.desc']) md.setAttribute('content', dict['meta.desc']);
@@ -341,7 +364,8 @@
           var cr = s.getBoundingClientRect();
           var d = Math.hypot(mx - (cr.left + cr.width / 2), my - (cr.top + cr.height / 2));
           var t = clamp(1 - d / 220, 0, 1);
-          var w = Math.round(700 - t * 340);
+          /* Untergrenze 560: die Headline bleibt lesbar, während man sie liest */
+          var w = Math.round(700 - t * 140);
           if(Math.abs(w - (s._w || 700)) > 3){ s._w = w; s.style.fontVariationSettings = "'wght' " + w; }
           s.style.transform = t > 0.01 ? 'translateY(' + (-7 * t).toFixed(1) + 'px)' : 'none';
         }
@@ -720,7 +744,10 @@
       var cases = $$('article.pcard', pinTrack);
       var medias = $$('.pc-media', pinTrack).map(function(m){ return {m:m, img:$('img, .pc-art', m)}; });
       var mq = matchMedia('(max-width:900px)');
-      var dist = 0, on = false, curX = 0;
+      /* Volle horizontale Strecke, aber nur ~60 % davon als gebundener
+         vertikaler Scrollweg – kürzt den Pin für Durchscroller. */
+      var SCROLL_RATE = .62;
+      var dist = 0, travel = 0, on = false, curX = 0;
       var moreBtn = $('#caseMore');
 
       function syncMoreBtn(){
@@ -751,7 +778,8 @@
         pinTrack.classList.remove('collapsed');
         pinTrack.style.transform = 'translate3d(0,0,0)';
         dist = Math.max(0, pinTrack.scrollWidth - innerWidth);
-        pinSec.style.height = (innerHeight + dist) + 'px';
+        travel = Math.round(dist * SCROLL_RATE);
+        pinSec.style.height = (innerHeight + travel) + 'px';
         on = dist > 0;
       }
       pinMetricsFn = metrics;
@@ -768,7 +796,7 @@
         if(!on) return;
         var r = pinSec.getBoundingClientRect();
         if(r.bottom < -60 || r.top > innerHeight + 60) return;
-        var p = clamp(-r.top / dist, 0, 1);
+        var p = clamp(-r.top / travel, 0, 1);
         var targX = -p * dist;
         curX = lerp(curX, targX, .18);
         if(Math.abs(curX - targX) < .1) curX = targX;
@@ -792,7 +820,7 @@
         if(!card) return;
         var x = clamp(card.offsetLeft - (innerWidth - card.offsetWidth) / 2, 0, dist);
         var secTop = pinSec.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({top: secTop + x, behavior:'instant' in window ? 'instant' : 'auto'});
+        window.scrollTo({top: secTop + x * SCROLL_RATE, behavior: reduced ? 'auto' : 'smooth'});
       });
 
     })();
@@ -956,12 +984,15 @@
     b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
   });
 
-  /* ═══════════════ Easteregg: Konsolen-Gruß ═══════════════ */
-  console.log(
-    '%cMoin. Du liest den Quelltext?%c\nDann verstehen wir uns vermutlich gut.  →  hallo@danielmartin.fyi',
-    'color:#34B7C4;font:700 15px/1.6 system-ui,sans-serif',
-    'color:#888;font:400 13px/1.6 system-ui,sans-serif'
-  );
+  /* ═══════════════ Easteregg: Konsolen-Gruß (folgt der Sprache) ═══════════════ */
+  (function(){
+    var cg = I18N[curLang] || I18N.de;
+    console.log(
+      '%c' + cg['egg.console1'] + '%c\n' + cg['egg.console2'],
+      'color:#34B7C4;font:700 15px/1.6 system-ui,sans-serif',
+      'color:#888;font:400 13px/1.6 system-ui,sans-serif'
+    );
+  })();
 
   /* ═══════════════ Easteregg: Konami-Code → „Vordenken-Modus" ═══════════════ */
   (function(){
@@ -989,7 +1020,7 @@
         refresh();                                   /* Mono-Metriken: Fit + Splits neu */
         themeHooks.forEach(function(fn){ fn(); });   /* Canvas auf Phosphor umfärben */
       }, reduced ? 0 : 280);
-      if(!on) toast('Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)');
+      if(!on) toast((I18N[curLang] || I18N.de)['egg.toast']);
       setTimeout(function(){ active = false; }, 1500);
     }
     /* Scramble-Welle: alle sichtbaren Headlines dekodieren sich einmal durch –

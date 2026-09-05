@@ -6,5 +6,9 @@ _local/
 # Claude-Code-Projekteinstellungen (lokales Tooling)
 .claude/
 
+# Impeccable-Design-Tooling (lokal, nicht deployen)
+.impeccable/
+PRODUCT.md
+
 # Editor-/Workspace-Dateien
 portfolio.code-workspace

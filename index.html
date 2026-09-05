@@ -22,11 +22,37 @@
 <meta name="twitter:description" content="Komplexe Themen verständlich und wirksam machen: Content-Strategie, KI und Change.">
 <meta name="twitter:image" content="https://danielmartin.fyi/img/og-image.png">
 <meta name="twitter:image:alt" content="Daniel Martin – Content und AI Strategist. Klartexten. Vordenken.">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ProfilePage",
+  "inLanguage":["de","en"],
+  "url":"https://danielmartin.fyi/",
+  "mainEntity":{
+    "@type":"Person",
+    "name":"Daniel Martin",
+    "jobTitle":"Content und AI Strategist",
+    "description":"Content und AI Strategist aus Köln: Content-Strategie für komplexe Themen, KI und Change.",
+    "url":"https://danielmartin.fyi/",
+    "image":"https://danielmartin.fyi/assets/portrait.webp",
+    "email":"mailto:hallo@danielmartin.fyi",
+    "address":{"@type":"PostalAddress","addressLocality":"Köln","addressCountry":"DE"},
+    "sameAs":["https://www.linkedin.com/in/daniel-nicht-martin/"],
+    "worksFor":{"@type":"Organization","name":"Convidera"},
+    "alumniOf":[
+      {"@type":"CollegeOrUniversity","name":"Universität zu Köln"},
+      {"@type":"CollegeOrUniversity","name":"Universität Bonn"}
+    ],
+    "knowsLanguage":["de","en"],
+    "knowsAbout":["Content-Strategie","Redaktion","PR","CEO-Ghostwriting","SEO","SEA","GEO","KI-Enablement","GenAI-Workflows","Change Management","Agile Zusammenarbeit"]
+  }
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preload" href="assets/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* Theme früh setzen, um Flackern zu vermeiden */(function(){try{var t=localStorage.getItem('dm-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script>/* Easteregg-Skin früh wiederherstellen (Konami: Terminal-Modus) */try{if(sessionStorage.getItem('dm-egg'))document.documentElement.setAttribute('data-egg','terminal');}catch(e){}</script>
-<link rel="stylesheet" href="css/style.css?v=18">
+<link rel="stylesheet" href="css/style.css?v=19">
 </head>
 <body>
 
@@ -122,12 +148,14 @@
     <!-- ── SKILL-MARQUEE (eine Reihe, ruhig) ── -->
     <div class="mq" aria-hidden="true">
       <div class="mq-row mq-a">
-        <div class="mq-track">
+        <div class="mq-track" id="mqTrack">
           <span>Content-Strategie</span><b>✳</b><span>Redaktion</span><b>✳</b><span>PR</span><b>✳</b><span>CEO-Ghostwriting</span><b>✳</b><span>SEO &amp; SEA</span><b>✳</b><span>KI-Enablement</span><b>✳</b><span>GenAI-Workflows</span><b>✳</b><span>Change Management</span><b>✳</b><span>Agile</span><b>✳</b>
           <span>Content-Strategie</span><b>✳</b><span>Redaktion</span><b>✳</b><span>PR</span><b>✳</b><span>CEO-Ghostwriting</span><b>✳</b><span>SEO &amp; SEA</span><b>✳</b><span>KI-Enablement</span><b>✳</b><span>GenAI-Workflows</span><b>✳</b><span>Change Management</span><b>✳</b><span>Agile</span><b>✳</b>
         </div>
       </div>
     </div>
+    <!-- Zugängliche/maschinenlesbare Fassung des dekorativen Marquees -->
+    <p class="sr-only" data-i18n="skills.srlist">Schwerpunkte: Content-Strategie, Redaktion, PR, CEO-Ghostwriting, SEO &amp; SEA, KI-Enablement, GenAI-Workflows, Change Management und agile Zusammenarbeit.</p>
 
     <!-- ── 01 ÜBER MICH ── -->
     <section id="about" class="sec" data-idx="01" data-navkey="nav.about">
@@ -162,7 +190,7 @@
       <div class="wrap">
         <p class="sec-num mono" data-reveal><span data-i18n="career.num">02 / Werdegang</span></p>
         <h2 class="sec-title" data-split data-i18n="career.title">Wo ich herkomme.</h2>
-        <p class="sec-lead" data-reveal data-i18n="career.lead">Vier Stationen, ein roter Faden: komplexe Themen verständlich machen.</p>
+        <p class="sec-lead" data-reveal data-i18n="career.lead">Ein roter Faden durch jede Station: komplexe Themen verständlich machen.</p>
         <p class="sr-only" data-i18n="career.srhint">Berufliche Stationen in chronologischer Reihenfolge, die aktuellste zuerst.</p>
         <ol class="cvlist">
           <li class="cvrow" data-reveal>
@@ -328,10 +356,10 @@
               </div>
             </article>
           </div>
-          <div class="pin-progress mono" aria-hidden="true">
-            <span id="pinCount">01 / 05</span>
-            <span class="pin-bar"><i id="pinBar"></i></span>
-            <span class="pin-next" id="pinNext"><span data-i18n="contact.num">04 / Kontakt</span> <b>↓</b></span>
+          <div class="pin-progress mono">
+            <span id="pinCount" aria-hidden="true">01 / 05</span>
+            <span class="pin-bar" aria-hidden="true"><i id="pinBar"></i></span>
+            <a class="pin-next" id="pinNext" href="#contact"><span data-i18n="work.skip">Zum Kontakt</span> <b aria-hidden="true">↓</b></a>
           </div>
         </div>
       </div>
@@ -374,6 +402,7 @@
       <details class="legal-details" id="legal">
         <summary data-i18n="impressum.summary">Impressum &amp; Datenschutz</summary>
         <div class="legal">
+          <p class="legal-note" data-i18n="legal.langnote"></p>
           <p><strong>Angaben gemäß § 5 DDG</strong><br>
           Daniel Martin<br>
           c/o POSTFLEX PFX-333-216<br>
@@ -384,7 +413,7 @@
           <p><strong>Verantwortlich i. S. d. § 18 Abs. 2 MStV</strong><br>
           Daniel Martin, Anschrift wie oben.</p>
           <p><strong>Datenschutz</strong><br>
-          Diese Seite ist statisch auf GitHub Pages gehostet, setzt keine Cookies und bindet keine externen Dienste oder Schriftarten von Drittservern ein. Es findet kein Tracking statt. Einstellungen (z. B. Theme und Sprache) werden ausschließlich lokal im Browser gespeichert (Local Storage) und nicht übertragen. Beim Aufruf werden serverseitig technisch bedingt Zugriffsdaten (z. B. IP-Adresse) durch den Hoster GitHub verarbeitet, siehe <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">GitHub Privacy Statement</a>.</p>
+          Diese Seite ist statisch auf GitHub Pages gehostet, setzt keine Cookies und bindet keine externen Dienste oder Schriftarten von Drittservern ein. Es findet kein Tracking statt. Einstellungen (z. B. Theme und Sprache) sowie der Zustand eines kleinen Easter Eggs werden ausschließlich lokal im Browser gespeichert (Local bzw. Session Storage) und nicht übertragen. Beim Aufruf werden serverseitig technisch bedingt Zugriffsdaten (z. B. IP-Adresse) durch den Hoster GitHub verarbeitet, siehe <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">GitHub Privacy Statement</a>.</p>
           <p><strong>E-Mail-Postfach (mailbox.org)</strong><br>
           E-Mails an Adressen dieser Domain (z. B. <a href="mailto:hallo@danielmartin.fyi">hallo@danielmartin.fyi</a>) werden direkt von mailbox.org (Heinlein Support GmbH, Berlin) empfangen und verwaltet. Eine Übermittlung in Drittstaaten findet dabei nicht statt. Rechtsgrundlage ist das berechtigte Interesse an einer zuverlässigen und spamfreien Kontaktmöglichkeit gemäß Art. 6 Abs. 1 S. 1 lit. f DSGVO.</p>
         </div>
@@ -392,6 +421,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=18"></script>
+  <script src="js/main.js?v=19"></script>
 </body>
 </html>
