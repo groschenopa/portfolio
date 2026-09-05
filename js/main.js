@@ -122,7 +122,7 @@
   var I18N = {
     de:{
       "meta.title":"Daniel Martin – Content und AI Strategist",
-      "meta.desc":"Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie für komplexe Themen, KI und Change.",
+      "meta.desc":"Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie, KI und Change.",
       "nav.about":"Über mich", "nav.career":"Werdegang", "nav.work":"Projekte", "nav.contact":"Kontakt", "nav.cta":"Kontakt",
       "skip.link":"Zum Inhalt springen",
       "menu.label":"Menü", "menu.close":"Schließen",
@@ -151,6 +151,7 @@
       "work.intro":"Fünf Beispiele, wie Content, KI und Change in der Praxis zusammenspielen.",
       "work.more":"Weitere Projekte anzeigen", "work.less":"Weniger anzeigen",
       "work.skip":"Zum Kontakt",
+      "work.indexaria":"Projektübersicht",
       "case1.title":"Relaunch alan.de", "case1.meta":"GenAI-Plattform · SEA · Leadstrecken · PR",
       "case1.desc":"Alan ist die souveräne, in Deutschland gehostete KI-Plattform für Unternehmen und KRITIS. Für den Relaunch habe ich alle Inhalte verantwortet: von SEA-Copy und Leadstrecken bis zu Blog, Social und PR.",
       "case2.title":"Corporate-Magazin „Reisebericht“", "case2.meta":"Comma Soft · Redaktionsleitung · KI-Workflow",
@@ -183,6 +184,7 @@
       "egg.toast":"Gut, wir können uns gerne auch erstmal über 🎮 und 📽️ unterhalten… ;-)",
       "egg.console1":"Moin. Du liest den Quelltext?",
       "egg.console2":"Dann verstehen wir uns vermutlich gut.  →  hallo@danielmartin.fyi",
+      "nav.main":"Hauptmenü",
       "aria.home":"Daniel Martin – Startseite", "aria.menu":"Menü", "aria.theme.light":"Zum hellen Modus wechseln", "aria.theme.dark":"Zum dunklen Modus wechseln"
     },
     en:{
@@ -216,6 +218,7 @@
       "work.intro":"Five examples of how content, AI and change come together in practice.",
       "work.more":"Show more projects", "work.less":"Show fewer",
       "work.skip":"Skip to contact",
+      "work.indexaria":"Project overview",
       "case1.title":"alan.de relaunch", "case1.meta":"GenAI platform · SEA · lead funnels · PR",
       "case1.desc":"Alan is the sovereign, German-hosted AI platform for enterprises and critical-infrastructure (KRITIS) operators. For the relaunch I owned all content: from SEA copy and lead funnels to blog, social and PR.",
       "case2.title":"'Reisebericht' corporate magazine", "case2.meta":"Comma Soft · editorial lead · AI workflow",
@@ -248,6 +251,7 @@
       "egg.toast":"Deal — happy to talk 🎮 and 📽️ first… ;-)",
       "egg.console1":"Moin. Reading the source?",
       "egg.console2":"Then we'll probably get along.  →  hallo@danielmartin.fyi",
+      "nav.main":"Main menu",
       "aria.home":"Daniel Martin – home", "aria.menu":"Menu", "aria.theme.light":"Switch to light mode", "aria.theme.dark":"Switch to dark mode"
     }
   };
@@ -450,7 +454,7 @@
   }
   function splitsRebuild(){ splitEls.forEach(splitBuild); }
 
-  /* ═══════════════ Scroll-Reveals (starten nach dem Preloader) ═══════════════ */
+  /* ═══════════════ Scroll-Reveals ═══════════════ */
   var revealsInited = false;
   function initReveals(){
     if(revealsInited) return;
@@ -823,6 +827,25 @@
         window.scrollTo({top: secTop + x * SCROLL_RATE, behavior: reduced ? 'auto' : 'smooth'});
       });
 
+      /* Projekt-Index: springt im Pin-Modus zur Karte; im Stapel-Modus
+         greift der Anker, eingeklappte Karten werden vorher aufgeklappt */
+      $$('.case-index a').forEach(function(a){
+        a.addEventListener('click', function(e){
+          var i = parseInt(a.getAttribute('data-case'), 10);
+          var card = cases[i];
+          if(!card) return;
+          if(on){
+            e.preventDefault();
+            var x = clamp(card.offsetLeft - (innerWidth - card.offsetWidth) / 2, 0, dist);
+            var secTop = pinSec.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({top: secTop + x * SCROLL_RATE, behavior: reduced ? 'auto' : 'smooth'});
+          } else if(pinTrack.classList.contains('collapsed') && i >= 2){
+            pinTrack.classList.remove('collapsed');
+            syncMoreBtn();
+          }
+        });
+      });
+
     })();
   }
 
@@ -887,7 +910,7 @@
 
   /* ═══════════════ Uhr (Ortszeit Köln) ═══════════════ */
   (function(){
-    var els = [$('#clock'), $('#ovClock')].filter(Boolean);
+    var els = [$('#clock')].filter(Boolean);
     if(!els.length) return;
     var fmt;
     try{

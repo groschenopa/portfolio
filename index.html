@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Daniel Martin – Content und AI Strategist</title>
-<meta name="description" content="Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie für komplexe Themen, KI und Change.">
+<meta name="description" content="Daniel Martin, Content und AI Strategist aus Köln. Ich mache komplexe Themen verständlich und wirksam: Content-Strategie, KI und Change.">
 <meta name="author" content="Daniel Martin">
 <link rel="canonical" href="https://danielmartin.fyi/">
 <meta name="theme-color" content="#0A0A0D">
@@ -52,7 +52,7 @@
 <link rel="preload" href="assets/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* Theme früh setzen, um Flackern zu vermeiden */(function(){try{var t=localStorage.getItem('dm-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script>/* Easteregg-Skin früh wiederherstellen (Konami: Terminal-Modus) */try{if(sessionStorage.getItem('dm-egg'))document.documentElement.setAttribute('data-egg','terminal');}catch(e){}</script>
-<link rel="stylesheet" href="css/style.css?v=19">
+<link rel="stylesheet" href="css/style.css?v=20">
 </head>
 <body>
 
@@ -95,7 +95,7 @@
   <!-- ── Fullscreen-Menü ── -->
   <div class="ovmenu" id="ovmenu" aria-hidden="true">
     <svg class="ov-mark" viewBox="0 0 5016 5016" aria-hidden="true"><use href="#dmD"/></svg>
-    <nav class="ov-nav" aria-label="Hauptmenü">
+    <nav class="ov-nav" data-i18n-aria="nav.main" aria-label="Hauptmenü">
       <a href="#about" class="ov-link" data-scramble><span class="ov-idx mono">01</span><span class="ov-word" data-i18n="nav.about">Über mich</span></a>
       <a href="#career" class="ov-link" data-scramble><span class="ov-idx mono">02</span><span class="ov-word" data-i18n="nav.career">Werdegang</span></a>
       <a href="#work" class="ov-link" data-scramble><span class="ov-idx mono">03</span><span class="ov-word" data-i18n="nav.work">Projekte</span></a>
@@ -228,11 +228,18 @@
         <p class="sec-num mono" data-reveal><span data-i18n="work.num">03 / Projekte</span></p>
         <h2 class="sec-title" data-split data-i18n="work.title">Ausgewählte Projekte.</h2>
         <p class="sec-lead" data-reveal data-i18n="work.intro">Fünf Beispiele, wie Content, KI und Change in der Praxis zusammenspielen.</p>
+        <ol class="case-index mono" data-reveal data-i18n-aria="work.indexaria" aria-label="Projektübersicht">
+          <li><a href="#case1" data-case="0"><i aria-hidden="true">01</i><span data-i18n="case1.title">Relaunch alan.de</span></a></li>
+          <li><a href="#case2" data-case="1"><i aria-hidden="true">02</i><span data-i18n="case2.title">Corporate-Magazin „Reisebericht“</span></a></li>
+          <li><a href="#case3" data-case="2"><i aria-hidden="true">03</i><span data-i18n="case3.title">Agiler Change bei palmerhargreaves</span></a></li>
+          <li><a href="#case4" data-case="3"><i aria-hidden="true">04</i><span data-i18n="case4.title">C-Level-Positionierung</span></a></li>
+          <li><a href="#case5" data-case="4"><i aria-hidden="true">05</i><span data-i18n="case5.title">Messe-Narrativ für einen Telko-Konzern</span></a></li>
+        </ol>
       </div>
       <div class="pin-sec" id="pinSec">
         <div class="pin-vp">
           <div class="track" id="workTrack">
-            <article class="pcard">
+            <article class="pcard" id="case1">
               <figure class="pc-media"><svg class="pc-art" role="img" aria-label="alan.de, Kommunikation für eine sichere KI-Plattform" data-i18n-aria="img.case1" focusable="false" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                 <rect width="800" height="450" fill="#F2EFE7"/>
                 <defs><pattern id="a1d" width="36" height="36" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="3" fill="#0C6B74"/></pattern></defs>
@@ -257,7 +264,7 @@
                 <a class="pc-link" href="https://alan.de/" target="_blank" rel="noopener" data-i18n="case.view">Projekt ansehen ↗</a>
               </div>
             </article>
-            <article class="pcard">
+            <article class="pcard" id="case2">
               <figure class="pc-media"><svg class="pc-art" role="img" aria-label="Reisebericht, das Corporate-Magazin für Vorreiter, Comma Soft" data-i18n-aria="img.case2" focusable="false" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                 <rect width="800" height="450" fill="#F2EFE7"/>
                 <g fill="#E7E2D4">
@@ -284,7 +291,7 @@
                 <a class="pc-link" href="https://comma-soft.com/humboldt-gruppe/reisebericht-04/" target="_blank" rel="noopener" data-i18n="case.view">Projekt ansehen ↗</a>
               </div>
             </article>
-            <article class="pcard">
+            <article class="pcard" id="case3">
               <figure class="pc-media"><svg class="pc-art" role="img" aria-label="palmerhargreaves, B2B-Agentur in Köln" data-i18n-aria="img.case3" focusable="false" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                 <rect width="800" height="450" fill="#F2EFE7"/>
                 <g fill="#0C6B74">
@@ -305,7 +312,7 @@
                 <a class="pc-link" href="https://www.palmerhargreaves.com/de/" target="_blank" rel="noopener" data-i18n="case.view">Projekt ansehen ↗</a>
               </div>
             </article>
-            <article class="pcard">
+            <article class="pcard" id="case4">
               <figure class="pc-media"><svg class="pc-art" role="img" aria-label="C-Level-Positionierung und Thought Leadership" data-i18n-aria="img.case4" focusable="false" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                 <rect width="800" height="450" fill="#F2EFE7"/>
                 <line x1="40" y1="225" x2="760" y2="225" stroke="#1A1A1E" stroke-width="1.5" opacity=".25"/>
@@ -328,7 +335,7 @@
                 <a class="pc-link" href="#contact" data-i18n="case.talk">Mehr im Gespräch →</a>
               </div>
             </article>
-            <article class="pcard">
+            <article class="pcard" id="case5">
               <figure class="pc-media"><svg class="pc-art" role="img" aria-label="Messeauftritt eines Telko-Konzerns" data-i18n-aria="img.case5" focusable="false" viewBox="0 0 800 450" preserveAspectRatio="xMidYMid slice">
                 <rect width="800" height="450" fill="#F2EFE7"/>
                 <defs>
@@ -421,6 +428,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=19"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>
